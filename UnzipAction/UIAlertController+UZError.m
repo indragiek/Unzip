@@ -12,7 +12,9 @@
 
 + (instancetype)uz_alertControllerWithError:(NSError *)error
 {
-    return [self alertControllerWithTitle:error.localizedDescription message:error.localizedRecoverySuggestion preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [self alertControllerWithTitle:error.localizedDescription message:error.localizedRecoverySuggestion preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleDefault handler:nil]];
+    return alert;
 }
 
 @end
