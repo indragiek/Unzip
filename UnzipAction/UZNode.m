@@ -49,7 +49,6 @@ static NSArray * IgnoredFilenames()
     return filenames;
 }
 
-static UZNode *NodeForEntries(NSArray *entries, ZZArchiveEntry *parent, NSUInteger level)
 static UZNode * NodeForEntries(NSArray *entries, ZZArchiveEntry *parent, NSUInteger level)
 {
     NSArray *ignoredFilenames = IgnoredFilenames();
@@ -123,6 +122,11 @@ static void PrintPrettyHierarchicalRepresentation(UZNode *node, NSMutableString 
 + (instancetype)nodeWithArchive:(ZZArchive *)archive
 {
     return NodeForEntries(archive.entries, nil, 0);
+}
+
+- (NSInputStream *)streamWithPassword:(NSString *)password error:(NSError **)error
+{
+    return [self.archiveEntry newStreamWithPassword:password error:error];
 }
 
 #pragma mark - NSObject

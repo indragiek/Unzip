@@ -21,4 +21,6 @@
 
 + (instancetype)nodeWithArchive:(ZZArchive *)archive;
 
+- (NSInputStream *)streamWithPassword:(NSString *)password error:(NSError **)error;
+
 @end
