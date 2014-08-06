@@ -124,11 +124,29 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
     }
     
-    NSArray *children = self.sections[indexPath.section];
-    UZNode *node = children[indexPath.row];
+    UZNode *node = [self nodeAtIndexPath:indexPath];
     
     cell.textLabel.text = node.fileName;
     return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    UZNodeViewController *controller = [[self.class alloc] init];
+    controller.rootNode = [self nodeAtIndexPath:indexPath];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+#pragma mark - Private
+
+- (UZNode *)nodeAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *children = self.sections[indexPath.section];
+    return children[indexPath.row];
 }
 
 @end
