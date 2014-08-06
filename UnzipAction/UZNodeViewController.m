@@ -7,6 +7,7 @@
 //
 
 #import "UZNodeViewController.h"
+#import "UZNodeTableViewCell.h"
 #import "UZPreviewViewController.h"
 #import "UZNode.h"
 
@@ -128,14 +129,18 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *reuseIdentifier = @"NodeCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    UZNodeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
+        cell = [[UZNodeTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
     }
     
     UZNode *node = [self nodeAtIndexPath:indexPath];
     
     cell.textLabel.text = node.fileName;
+    if (!node.directory) {
+        cell.detailTextLabel.text = [NSByteCountFormatter stringFromByteCount:node.uncompressedSize countStyle:NSByteCountFormatterCountStyleFile];
+    }
+    
     return cell;
 }
 

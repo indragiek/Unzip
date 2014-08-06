@@ -22,6 +22,7 @@
 		7218C4CA1991F33100D7C757 /* UZPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7218C4C91991F33100D7C757 /* UZPreviewViewController.m */; };
 		7218C4CE1991F8B700D7C757 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7218C4CC1991F8B700D7C757 /* Localizable.strings */; };
 		7218C4DB1991FC3800D7C757 /* UZPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7218C4DA1991FC3800D7C757 /* UZPreviewViewController.xib */; };
+		72A4BC201992CA9F00884AAC /* UZNodeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC1F1992CA9F00884AAC /* UZNodeTableViewCell.m */; };
 		91B01368CAFB453181A38E86 /* libPods-UnzipAction.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B27AF6F9FDC447882016106 /* libPods-UnzipAction.a */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +94,8 @@
 		7218C4C91991F33100D7C757 /* UZPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZPreviewViewController.m; sourceTree = "<group>"; };
 		7218C4CD1991F8B700D7C757 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		7218C4DA1991FC3800D7C757 /* UZPreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UZPreviewViewController.xib; sourceTree = "<group>"; };
+		72A4BC1E1992CA9F00884AAC /* UZNodeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZNodeTableViewCell.h; sourceTree = "<group>"; };
+		72A4BC1F1992CA9F00884AAC /* UZNodeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZNodeTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +205,8 @@
 				7218C4BA1991748400D7C757 /* UZArchiveViewController.m */,
 				7218C4C219917A5500D7C757 /* UZNodeViewController.h */,
 				7218C4C319917A5500D7C757 /* UZNodeViewController.m */,
+				72A4BC1E1992CA9F00884AAC /* UZNodeTableViewCell.h */,
+				72A4BC1F1992CA9F00884AAC /* UZNodeTableViewCell.m */,
 				7218C4C81991F33100D7C757 /* UZPreviewViewController.h */,
 				7218C4C91991F33100D7C757 /* UZPreviewViewController.m */,
 				7218C4DA1991FC3800D7C757 /* UZPreviewViewController.xib */,
@@ -418,6 +423,7 @@
 				7218C4C419917A5500D7C757 /* UZNodeViewController.m in Sources */,
 				7218C4C1199176B400D7C757 /* UIAlertController+UZError.m in Sources */,
 				7218C4BB1991748400D7C757 /* UZArchiveViewController.m in Sources */,
+				72A4BC201992CA9F00884AAC /* UZNodeTableViewCell.m in Sources */,
 				7218C4CA1991F33100D7C757 /* UZPreviewViewController.m in Sources */,
 				7218C4C71991C99700D7C757 /* UZNode.m in Sources */,
 			);

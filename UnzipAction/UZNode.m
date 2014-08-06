@@ -50,6 +50,7 @@ static NSArray * IgnoredFilenames()
 }
 
 static UZNode *NodeForEntries(NSArray *entries, ZZArchiveEntry *parent, NSUInteger level)
+static UZNode * NodeForEntries(NSArray *entries, ZZArchiveEntry *parent, NSUInteger level)
 {
     NSArray *ignoredFilenames = IgnoredFilenames();
     NSMutableDictionary *nameToEntryContainerMapping = [[NSMutableDictionary alloc] init];
@@ -109,6 +110,7 @@ static void PrintPrettyHierarchicalRepresentation(UZNode *node, NSMutableString 
     if ((self = [super init])) {
         _directory = EntryIsDirectory(entry);
         _encrypted = entry.encrypted;
+        _uncompressedSize = entry.uncompressedSize;
         if (level >= 1) {
             _fileName = entry.fileName.pathComponents[level - 1];
         }

@@ -16,6 +16,7 @@
 @property (nonatomic, strong, readonly) NSArray *children;
 @property (nonatomic, assign, readonly, getter=isDirectory) BOOL directory;
 @property (nonatomic, assign, readonly, getter=isEncrypted) BOOL encrypted;
+@property (nonatomic, assign, readonly) NSUInteger uncompressedSize;
 @property (nonatomic, copy, readonly) NSString *fileName;
 
 + (instancetype)nodeWithArchive:(ZZArchive *)archive;
