@@ -16,26 +16,25 @@
 
 static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *collation)
 {
-    NSMutableDictionary *sections = [[NSMutableDictionary alloc] init];
+    NSMutableArray *sections = [[NSMutableArray alloc] init];
     const SEL stringSelector = @selector(fileName);
+    const NSUInteger titleCount = collation.sectionIndexTitles.count;
+    
+    for (NSUInteger i = 0; i < titleCount; i++) {
+        [sections addObject:[[NSMutableArray alloc] init]];
+    }
     
     for (UZNode *child in node.children) {
-        NSInteger section = [collation sectionForObject:child collationStringSelector:stringSelector];
-        NSMutableArray *children = sections[@(section)];
-        if (children == nil) {
-            children = [[NSMutableArray alloc] init];
-            sections[@(section)] = children;
-        }
-        [children addObject:child];
+        NSInteger sectionIndex = [collation sectionForObject:child collationStringSelector:stringSelector];
+        [sections[sectionIndex] addObject:child];
     }
     
-    NSArray *sortedKeys = [sections.allKeys sortedArrayUsingSelector:@selector(compare:)];
-    NSMutableArray *sortedSections = [[NSMutableArray alloc] init];
-    for (NSNumber *sectionIndex in sortedKeys) {
-        NSArray *sortedChildren = [collation sortedArrayFromArray:sections[sectionIndex] collationStringSelector:stringSelector];
-        [sortedSections addObject:sortedChildren];
+    for (NSUInteger i = 0; i < titleCount; i++) {
+        NSArray *sortedChildren = [collation sortedArrayFromArray:sections[i] collationStringSelector:stringSelector];
+        [sections replaceObjectAtIndex:i withObject:sortedChildren];
     }
-    return sortedSections;
+    
+    return sections;
 }
 
 @implementation UZNodeViewController
@@ -101,7 +100,10 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return self.collation.sectionTitles[section];
+    if ([self.sections[section] count] != 0) {
+        return self.collation.sectionTitles[section];
+    }
+    return nil;
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
