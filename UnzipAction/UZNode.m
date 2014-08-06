@@ -30,6 +30,7 @@
 
 @interface UZNode ()
 - (instancetype)initWithEntry:(ZZArchiveEntry *)entry level:(NSUInteger)level children:(NSArray *)children;
+@property (nonatomic, strong, readonly) ZZArchiveEntry *archiveEntry;
 @end
 
 static BOOL EntryIsDirectory(ZZArchiveEntry *entry)
@@ -107,6 +108,7 @@ static void PrintPrettyHierarchicalRepresentation(UZNode *node, NSMutableString 
 {
     if ((self = [super init])) {
         _directory = EntryIsDirectory(entry);
+        _encrypted = entry.encrypted;
         if (level >= 1) {
             _fileName = entry.fileName.pathComponents[level - 1];
         }

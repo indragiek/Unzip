@@ -12,6 +12,8 @@
 
 @interface UZNodeViewController : UITableViewController
 
+- (instancetype)initWithRootNode:(UZNode *)rootNode;
+
 @property (nonatomic, strong) UZNode *rootNode;
 
 @end

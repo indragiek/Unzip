@@ -19,6 +19,9 @@
 		7218C4C1199176B400D7C757 /* UIAlertController+UZError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7218C4C0199176B400D7C757 /* UIAlertController+UZError.m */; };
 		7218C4C419917A5500D7C757 /* UZNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7218C4C319917A5500D7C757 /* UZNodeViewController.m */; };
 		7218C4C71991C99700D7C757 /* UZNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7218C4C61991C99700D7C757 /* UZNode.m */; };
+		7218C4CA1991F33100D7C757 /* UZPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7218C4C91991F33100D7C757 /* UZPreviewViewController.m */; };
+		7218C4CE1991F8B700D7C757 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7218C4CC1991F8B700D7C757 /* Localizable.strings */; };
+		7218C4DB1991FC3800D7C757 /* UZPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7218C4DA1991FC3800D7C757 /* UZPreviewViewController.xib */; };
 		91B01368CAFB453181A38E86 /* libPods-UnzipAction.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B27AF6F9FDC447882016106 /* libPods-UnzipAction.a */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +89,10 @@
 		7218C4C319917A5500D7C757 /* UZNodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZNodeViewController.m; sourceTree = "<group>"; };
 		7218C4C51991C99700D7C757 /* UZNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZNode.h; sourceTree = "<group>"; };
 		7218C4C61991C99700D7C757 /* UZNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZNode.m; sourceTree = "<group>"; };
+		7218C4C81991F33100D7C757 /* UZPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZPreviewViewController.h; sourceTree = "<group>"; };
+		7218C4C91991F33100D7C757 /* UZPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZPreviewViewController.m; sourceTree = "<group>"; };
+		7218C4CD1991F8B700D7C757 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		7218C4DA1991FC3800D7C757 /* UZPreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UZPreviewViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,7 +202,11 @@
 				7218C4BA1991748400D7C757 /* UZArchiveViewController.m */,
 				7218C4C219917A5500D7C757 /* UZNodeViewController.h */,
 				7218C4C319917A5500D7C757 /* UZNodeViewController.m */,
+				7218C4C81991F33100D7C757 /* UZPreviewViewController.h */,
+				7218C4C91991F33100D7C757 /* UZPreviewViewController.m */,
+				7218C4DA1991FC3800D7C757 /* UZPreviewViewController.xib */,
 				7218C4AE19916F5E00D7C757 /* MainInterface.storyboard */,
+				7218C4CB1991F8B700D7C757 /* en.lproj */,
 				7218C4A919916F5E00D7C757 /* Supporting Files */,
 			);
 			path = UnzipAction;
@@ -207,6 +218,14 @@
 				7218C4AA19916F5E00D7C757 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7218C4CB1991F8B700D7C757 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				7218C4CC1991F8B700D7C757 /* Localizable.strings */,
+			);
+			path = en.lproj;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,6 +352,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7218C4AF19916F5E00D7C757 /* MainInterface.storyboard in Resources */,
+				7218C4CE1991F8B700D7C757 /* Localizable.strings in Resources */,
+				7218C4DB1991FC3800D7C757 /* UZPreviewViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +418,7 @@
 				7218C4C419917A5500D7C757 /* UZNodeViewController.m in Sources */,
 				7218C4C1199176B400D7C757 /* UIAlertController+UZError.m in Sources */,
 				7218C4BB1991748400D7C757 /* UZArchiveViewController.m in Sources */,
+				7218C4CA1991F33100D7C757 /* UZPreviewViewController.m in Sources */,
 				7218C4C71991C99700D7C757 /* UZNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,6 +450,14 @@
 				7218C48B19916F4B00D7C757 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7218C4CC1991F8B700D7C757 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7218C4CD1991F8B700D7C757 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

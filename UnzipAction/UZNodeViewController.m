@@ -7,6 +7,7 @@
 //
 
 #import "UZNodeViewController.h"
+#import "UZPreviewViewController.h"
 #import "UZNode.h"
 
 @interface UZNodeViewController ()
@@ -38,6 +39,14 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
 }
 
 @implementation UZNodeViewController
+
+- (instancetype)initWithRootNode:(UZNode *)rootNode
+{
+    if ((self = [self init])) {
+        self.rootNode = rootNode;
+    }
+    return self;
+}
 
 - (instancetype)init
 {
@@ -136,9 +145,21 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    UZNodeViewController *controller = [[self.class alloc] init];
-    controller.rootNode = [self nodeAtIndexPath:indexPath];
-    [self.navigationController pushViewController:controller animated:YES];
+    UZNode *node = [self nodeAtIndexPath:indexPath];
+    if (node.directory) {
+        UZNodeViewController *viewController = [[self.class alloc] initWithRootNode:node];
+        [self.navigationController pushViewController:viewController animated:YES];
+    } else if (node.encrypted) {
+        [self presentPasswordAlertForNode:node completionHandler:^(NSString *password) {
+            if (password != nil) {
+                UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:NO password:password];
+                [self.navigationController pushViewController:viewController animated:YES];
+            }
+        }];
+    } else {
+        UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:NO password:nil];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
 }
 
 #pragma mark - Private
@@ -147,6 +168,29 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
 {
     NSArray *children = self.sections[indexPath.section];
     return children[indexPath.row];
+}
+
+- (void)presentPasswordAlertForNode:(UZNode *)node completionHandler:(void (^)(NSString *password))completionHandler
+{
+    NSParameterAssert(completionHandler);
+    
+    NSString *message = [NSString stringWithFormat:NSLocalizedString(@"EncryptionAlertMessage", nil), node.fileName];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"EncryptionAlertTitle", nil) message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.secureTextEntry = YES;
+    }];
+    
+    __weak UIAlertController *weakAlert = alert;
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        completionHandler([weakAlert.textFields[0] text]);
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        completionHandler(nil);
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end
