@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>UnzipAction.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -18,6 +23,11 @@
 			<true/>
 		</dict>
 		<key>7218C49219916F4C00D7C757</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7218C4A619916F5E00D7C757</key>
 		<dict>
 			<key>primary</key>
 			<true/>
