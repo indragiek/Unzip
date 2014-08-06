@@ -1,21 +1,21 @@
 //
-//  UZFileSystemNode.m
+//  UZNode.m
 //  Unzip
 //
 //  Created by Indragie on 8/5/14.
 //  Copyright (c) 2014 Indragie Karunaratne. All rights reserved.
 //
 
-#import "UZFileSystemNode.h"
+#import "UZNode.h"
 
 #import <zipzap/zipzap.h>
 
-@interface UZFileSystemNodeEntryContainer : NSObject
+@interface UZNodeEntryContainer : NSObject
 @property (nonatomic, strong) ZZArchiveEntry *entry;
 @property (nonatomic, strong, readonly) NSMutableArray *mutableChildren;
 @end
 
-@implementation UZFileSystemNodeEntryContainer
+@implementation UZNodeEntryContainer
 
 - (instancetype)initWithEntry:(ZZArchiveEntry *)entry
 {
@@ -28,7 +28,7 @@
 
 @end
 
-@interface UZFileSystemNode ()
+@interface UZNode ()
 - (instancetype)initWithEntry:(ZZArchiveEntry *)entry level:(NSUInteger)level children:(NSArray *)children;
 @end
 
@@ -48,7 +48,7 @@ static NSArray * IgnoredFilenames()
     return filenames;
 }
 
-static UZFileSystemNode *NodeForEntries(NSArray *entries, ZZArchiveEntry *parent, NSUInteger level)
+static UZNode *NodeForEntries(NSArray *entries, ZZArchiveEntry *parent, NSUInteger level)
 {
     NSArray *ignoredFilenames = IgnoredFilenames();
     NSMutableDictionary *nameToEntryContainerMapping = [[NSMutableDictionary alloc] init];
@@ -61,9 +61,9 @@ static UZFileSystemNode *NodeForEntries(NSArray *entries, ZZArchiveEntry *parent
         NSString *fileName = components[level];
         if ([ignoredFilenames containsObject:fileName]) continue;
         
-        UZFileSystemNodeEntryContainer *container = nameToEntryContainerMapping[fileName];
+        UZNodeEntryContainer *container = nameToEntryContainerMapping[fileName];
         if (container == nil) {
-            container = [[UZFileSystemNodeEntryContainer alloc] initWithEntry:entry];
+            container = [[UZNodeEntryContainer alloc] initWithEntry:entry];
             nameToEntryContainerMapping[fileName] = container;
             [containers addObject:container];
         } else {
@@ -72,12 +72,12 @@ static UZFileSystemNode *NodeForEntries(NSArray *entries, ZZArchiveEntry *parent
     }
     
     NSMutableArray *children = [[NSMutableArray alloc] init];
-    for (UZFileSystemNodeEntryContainer *container in containers) {
-        UZFileSystemNode *node = NodeForEntries(container.mutableChildren, container.entry, level + 1);
+    for (UZNodeEntryContainer *container in containers) {
+        UZNode *node = NodeForEntries(container.mutableChildren, container.entry, level + 1);
         [children addObject:node];
     }
     
-    return [[UZFileSystemNode alloc] initWithEntry:parent level:level children:children];
+    return [[UZNode alloc] initWithEntry:parent level:level children:children];
 }
 
 static NSString * IndentationString(NSUInteger level)
@@ -89,19 +89,19 @@ static NSString * IndentationString(NSUInteger level)
     return string;
 }
 
-static void PrintPrettyHierarchicalRepresentation(UZFileSystemNode *node, NSMutableString *string, NSUInteger level)
+static void PrintPrettyHierarchicalRepresentation(UZNode *node, NSMutableString *string, NSUInteger level)
 {
     if (node.fileName.length != 0) {
         [string appendString:IndentationString(level)];
         [string appendFormat:@" %@\n", node.fileName];
     }
     
-    for (UZFileSystemNode *child in node.children) {
+    for (UZNode *child in node.children) {
         PrintPrettyHierarchicalRepresentation(child, string, level + 1);
     }
 }
 
-@implementation UZFileSystemNode
+@implementation UZNode
 
 - (instancetype)initWithEntry:(ZZArchiveEntry *)entry level:(NSUInteger)level children:(NSArray *)children
 {

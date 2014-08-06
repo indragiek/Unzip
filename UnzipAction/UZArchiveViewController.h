@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Indragie Karunaratne. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "UZNodeViewController.h"
 
-@interface UZArchiveViewController : UITableViewController
+@interface UZArchiveViewController : UZNodeViewController
 
 @end

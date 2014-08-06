@@ -1,5 +1,5 @@
 //
-//  UZDirectoryViewController.h
+//  UZNodeViewController.h
 //  Unzip
 //
 //  Created by Indragie on 8/5/14.
@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UZDirectoryViewController : UIViewController
+@class UZNode;
+
+@interface UZNodeViewController : UITableViewController
+
+@property (nonatomic, strong) UZNode *rootNode;
 
 @end

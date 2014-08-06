@@ -1,5 +1,5 @@
 //
-//  UZFileSystemNode.h
+//  UZNode.h
 //  Unzip
 //
 //  Created by Indragie on 8/5/14.
@@ -11,7 +11,7 @@
 @class ZZArchiveEntry;
 @class ZZArchive;
 
-@interface UZFileSystemNode : NSObject
+@interface UZNode : NSObject
 
 @property (nonatomic, strong, readonly) NSArray *children;
 @property (nonatomic, assign, readonly, getter=isDirectory) BOOL directory;

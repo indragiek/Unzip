@@ -8,7 +8,7 @@
 
 #import "UZArchiveViewController.h"
 #import "UIAlertController+UZError.h"
-#import "UZFileSystemNode.h"
+#import "UZNode.h"
 
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <zipzap/zipzap.h>
@@ -41,9 +41,7 @@ static void GetZipURLInItems(NSArray *inputItems, void (^completionHandler)(NSUR
     [super viewDidLoad];
     GetZipURLInItems(self.extensionContext.inputItems, ^(NSURL *URL, NSError *error) {
         if (error == nil) {
-            NSLog(@"no error");
             self.archive = [ZZArchive archiveWithContentsOfURL:URL];
-            NSLog(@"%@", self.archive);
         } else {
             UIAlertController *alert = [UIAlertController uz_alertControllerWithError:error];
             [self presentViewController:alert animated:YES completion:nil];
@@ -62,16 +60,8 @@ static void GetZipURLInItems(NSArray *inputItems, void (^completionHandler)(NSUR
 {
     if (_archive != archive) {
         _archive = archive;
-        
-        self.navigationItem.title = _archive.URL.lastPathComponent;
-        NSLog(@"NODE: \n%@", [UZFileSystemNode nodeWithArchive:_archive]);
-        [self.tableView reloadData];
+        self.rootNode = [UZNode nodeWithArchive:_archive];
     }
 }
-
-#pragma mark - UITableViewDataSource
-
-#pragma mark - UITableViewDelegate
-
 
 @end
