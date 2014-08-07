@@ -157,12 +157,12 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
     } else if (node.encrypted) {
         [self presentPasswordAlertForNode:node completionHandler:^(NSString *password) {
             if (password != nil) {
-                UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:NO password:password];
+                UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:node password:password];
                 [self.navigationController pushViewController:viewController animated:YES];
             }
         }];
     } else {
-        UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:NO password:nil];
+        UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:node password:nil];
         [self.navigationController pushViewController:viewController animated:YES];
     }
 }
