@@ -6,6 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UZPreviewViewController">
             <connections>
+                <outlet property="progressLabel" destination="Axs-7g-IRh" id="g1d-bj-ih4"/>
+                <outlet property="progressView" destination="RQs-VR-bwq" id="d0N-3V-owl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -14,21 +16,41 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unzipping..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XAl-ue-ZgZ">
-                    <rect key="frame" x="254" y="289" width="92" height="21"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h5v-uq-wKa">
+                    <rect key="frame" x="0.0" y="284" width="600" height="31"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Axs-7g-IRh">
+                            <rect key="frame" x="279" y="0.0" width="42" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="cyq-0r-0Hp"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RQs-VR-bwq">
+                            <rect key="frame" x="225" y="29" width="150" height="2"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="150" id="Npq-hF-mHX"/>
+                            </constraints>
+                        </progressView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="21" id="AJQ-K8-YTa"/>
-                        <constraint firstAttribute="width" constant="92" id="gyG-G2-Zah"/>
+                        <constraint firstAttribute="centerX" secondItem="RQs-VR-bwq" secondAttribute="centerX" id="0cE-wG-2Ro"/>
+                        <constraint firstItem="Axs-7g-IRh" firstAttribute="top" secondItem="h5v-uq-wKa" secondAttribute="top" id="BY3-tL-F8c"/>
+                        <constraint firstAttribute="bottom" secondItem="RQs-VR-bwq" secondAttribute="bottom" id="M5d-kl-df0"/>
+                        <constraint firstAttribute="centerX" secondItem="Axs-7g-IRh" secondAttribute="centerX" id="dxD-jb-Ogj"/>
+                        <constraint firstAttribute="height" constant="31" id="ncp-G5-tjQ"/>
+                        <constraint firstItem="RQs-VR-bwq" firstAttribute="top" secondItem="Axs-7g-IRh" secondAttribute="bottom" constant="8" id="yIH-V5-x3E"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="XAl-ue-ZgZ" secondAttribute="centerX" id="TM6-d6-QE2"/>
-                <constraint firstAttribute="centerY" secondItem="XAl-ue-ZgZ" secondAttribute="centerY" id="ada-LO-2Ev"/>
+                <constraint firstAttribute="centerY" secondItem="h5v-uq-wKa" secondAttribute="centerY" id="9vs-JL-ezy"/>
+                <constraint firstItem="h5v-uq-wKa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="He1-OZ-DDn"/>
+                <constraint firstAttribute="trailing" secondItem="h5v-uq-wKa" secondAttribute="trailing" id="nmr-ts-VC4"/>
             </constraints>
             <point key="canvasLocation" x="323" y="345"/>
         </view>

@@ -6,12 +6,15 @@
 //  Copyright (c) 2014 Indragie Karunaratne. All rights reserved.
 //
 
-#import <QuickLook/QuickLook.h>
+#import <UIKit/UIKit.h>
 
 @class UZNode;
+@class UZUnzipCoordinator;
 
 @interface UZPreviewViewController : UIViewController
 
-- (instancetype)initWithNode:(UZNode *)node password:(NSString *)password;
+- (instancetype)initWithNode:(UZNode *)node
+                    password:(NSString *)password
+            unzipCoordinator:(UZUnzipCoordinator *)unzipCoordinator;
 
 @end

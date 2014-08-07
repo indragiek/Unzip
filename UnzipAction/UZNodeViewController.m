@@ -11,6 +11,7 @@
 #import "UZNodeTableViewCell.h"
 #import "UZPreviewViewController.h"
 #import "UZNode.h"
+#import "UZUnzipCoordinator.h"
 
 @interface UZNodeViewController ()
 @property (nonatomic, strong) NSArray *sections;
@@ -160,12 +161,12 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
     } else if (node.encrypted) {
         [self presentPasswordAlertForNode:node completionHandler:^(NSString *password) {
             if (password != nil) {
-                UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:node password:password];
+                UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:node password:password unzipCoordinator:self.unzipCoordinator];
                 [self.navigationController pushViewController:viewController animated:YES];
             }
         }];
     } else {
-        UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:node password:nil];
+        UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:node password:nil unzipCoordinator:self.unzipCoordinator];
         [self.navigationController pushViewController:viewController animated:YES];
     }
 }
