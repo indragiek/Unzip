@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @class UZNode;
+@class UZUnzipCoordinator;
 
 @interface UZNodeViewController : UITableViewController
 
-- (instancetype)initWithRootNode:(UZNode *)rootNode;
+- (instancetype)initWithRootNode:(UZNode *)rootNode
+                unzipCoordinator:(UZUnzipCoordinator *)unzipCoordinator;
 
-@property (nonatomic, strong) UZNode *rootNode;
+@property (nonatomic, strong, readonly) UZNode *rootNode;
+@property (nonatomic, strong, readonly) UZUnzipCoordinator *unzipCoordinator;
 
 @end

@@ -7,8 +7,10 @@
 //
 
 #import "UZArchiveViewController.h"
-#import "UIAlertController+UZError.h"
+#import "UZNodeViewControllerSubclass.h"
 #import "UZNode.h"
+#import "UZUnzipCoordinator.h"
+#import "UIAlertController+UZError.h"
 
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <zipzap/zipzap.h>
@@ -81,7 +83,9 @@ static void GetZipURLInItems(NSArray *inputItems, void (^completionHandler)(NSUR
 {
     if (_archive != archive) {
         _archive = archive;
+        
         self.rootNode = [UZNode nodeWithArchive:_archive];
+        self.unzipCoordinator = [[UZUnzipCoordinator alloc] initWithArchive:_archive];
         self.navigationItem.title = _archive.URL.lastPathComponent;
     }
 }

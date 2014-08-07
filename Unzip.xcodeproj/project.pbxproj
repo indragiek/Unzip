@@ -102,6 +102,7 @@
 		72A4BC1F1992CA9F00884AAC /* UZNodeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZNodeTableViewCell.m; sourceTree = "<group>"; };
 		72A4BC211992DD1800884AAC /* UZUnzipCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZUnzipCoordinator.h; sourceTree = "<group>"; };
 		72A4BC221992DD1800884AAC /* UZUnzipCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZUnzipCoordinator.m; sourceTree = "<group>"; };
+		72A4BC2419931B2700884AAC /* UZNodeViewControllerSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZNodeViewControllerSubclass.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +212,7 @@
 				7218C4BA1991748400D7C757 /* UZArchiveViewController.m */,
 				7218C4C219917A5500D7C757 /* UZNodeViewController.h */,
 				7218C4C319917A5500D7C757 /* UZNodeViewController.m */,
+				72A4BC2419931B2700884AAC /* UZNodeViewControllerSubclass.h */,
 				72A4BC1E1992CA9F00884AAC /* UZNodeTableViewCell.h */,
 				72A4BC1F1992CA9F00884AAC /* UZNodeTableViewCell.m */,
 				7218C4C81991F33100D7C757 /* UZPreviewViewController.h */,

@@ -7,6 +7,7 @@
 //
 
 #import "UZNodeViewController.h"
+#import "UZNodeViewControllerSubclass.h"
 #import "UZNodeTableViewCell.h"
 #import "UZPreviewViewController.h"
 #import "UZNode.h"
@@ -42,9 +43,11 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
 @implementation UZNodeViewController
 
 - (instancetype)initWithRootNode:(UZNode *)rootNode
+                unzipCoordinator:(UZUnzipCoordinator *)unzipCoordinator
 {
     if ((self = [self init])) {
         self.rootNode = rootNode;
+        self.unzipCoordinator = unzipCoordinator;
     }
     return self;
 }
@@ -152,7 +155,7 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
     
     UZNode *node = [self nodeAtIndexPath:indexPath];
     if (node.directory) {
-        UZNodeViewController *viewController = [[self.class alloc] initWithRootNode:node];
+        UZNodeViewController *viewController = [[self.class alloc] initWithRootNode:node unzipCoordinator:self.unzipCoordinator];
         [self.navigationController pushViewController:viewController animated:YES];
     } else if (node.encrypted) {
         [self presentPasswordAlertForNode:node completionHandler:^(NSString *password) {
