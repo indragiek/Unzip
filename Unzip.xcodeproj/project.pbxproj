@@ -24,6 +24,7 @@
 		7218C4DB1991FC3800D7C757 /* UZPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7218C4DA1991FC3800D7C757 /* UZPreviewViewController.xib */; };
 		72A4BC1A1992BD8B00884AAC /* UZUnzipOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC191992BD8B00884AAC /* UZUnzipOperation.m */; };
 		72A4BC201992CA9F00884AAC /* UZNodeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC1F1992CA9F00884AAC /* UZNodeTableViewCell.m */; };
+		72A4BC231992DD1800884AAC /* UZUnzipCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC221992DD1800884AAC /* UZUnzipCoordinator.m */; };
 		91B01368CAFB453181A38E86 /* libPods-UnzipAction.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B27AF6F9FDC447882016106 /* libPods-UnzipAction.a */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +100,8 @@
 		72A4BC191992BD8B00884AAC /* UZUnzipOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZUnzipOperation.m; sourceTree = "<group>"; };
 		72A4BC1E1992CA9F00884AAC /* UZNodeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZNodeTableViewCell.h; sourceTree = "<group>"; };
 		72A4BC1F1992CA9F00884AAC /* UZNodeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZNodeTableViewCell.m; sourceTree = "<group>"; };
+		72A4BC211992DD1800884AAC /* UZUnzipCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZUnzipCoordinator.h; sourceTree = "<group>"; };
+		72A4BC221992DD1800884AAC /* UZUnzipCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZUnzipCoordinator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +218,8 @@
 				7218C4DA1991FC3800D7C757 /* UZPreviewViewController.xib */,
 				72A4BC181992BD8B00884AAC /* UZUnzipOperation.h */,
 				72A4BC191992BD8B00884AAC /* UZUnzipOperation.m */,
+				72A4BC211992DD1800884AAC /* UZUnzipCoordinator.h */,
+				72A4BC221992DD1800884AAC /* UZUnzipCoordinator.m */,
 				7218C4AE19916F5E00D7C757 /* MainInterface.storyboard */,
 				7218C4CB1991F8B700D7C757 /* en.lproj */,
 				7218C4A919916F5E00D7C757 /* Supporting Files */,
@@ -425,6 +430,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72A4BC231992DD1800884AAC /* UZUnzipCoordinator.m in Sources */,
 				7218C4C419917A5500D7C757 /* UZNodeViewController.m in Sources */,
 				72A4BC1A1992BD8B00884AAC /* UZUnzipOperation.m in Sources */,
 				7218C4C1199176B400D7C757 /* UIAlertController+UZError.m in Sources */,

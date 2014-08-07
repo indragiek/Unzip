@@ -24,6 +24,9 @@
                     password:(NSString *)password
        temporaryDirectoryURL:(NSURL *)temporaryDirectoryURL
 {
+    NSParameterAssert(node);
+    NSParameterAssert(temporaryDirectoryURL);
+    
     if ((self = [super init])) {
         _node = node;
         _password = [password copy];
@@ -79,6 +82,10 @@
             if (bytesRead > 0) {
                 [fileHandle writeData:[NSData dataWithBytesNoCopy:bytes length:bytesRead]];
                 totalBytesRead += bytesRead;
+                
+                if (self.progressHandler != nil) {
+                    self.progressHandler((float)totalBytesRead / totalSize);
+                }
             } else {
                 break;
             }

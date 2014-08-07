@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong, readonly) NSError *error;
 @property (nonatomic, strong, readonly) NSURL *fileURL;
+@property (nonatomic, copy) void (^progressHandler)(float progress);
 
 - (instancetype)initWithNode:(UZNode *)node
                     password:(NSString *)password
