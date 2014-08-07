@@ -27,6 +27,7 @@
 		72A4BC231992DD1800884AAC /* UZUnzipCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC221992DD1800884AAC /* UZUnzipCoordinator.m */; };
 		72A4BC271993286E00884AAC /* UZExtensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC261993286E00884AAC /* UZExtensionViewController.m */; };
 		72A4BC2A1993290D00884AAC /* UZExtensionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC291993290D00884AAC /* UZExtensionTableViewController.m */; };
+		72A4BC2D1993314E00884AAC /* UZOpenInActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC2C1993314E00884AAC /* UZOpenInActivity.m */; };
 		91B01368CAFB453181A38E86 /* libPods-UnzipAction.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B27AF6F9FDC447882016106 /* libPods-UnzipAction.a */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +110,8 @@
 		72A4BC261993286E00884AAC /* UZExtensionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZExtensionViewController.m; sourceTree = "<group>"; };
 		72A4BC281993290D00884AAC /* UZExtensionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZExtensionTableViewController.h; sourceTree = "<group>"; };
 		72A4BC291993290D00884AAC /* UZExtensionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZExtensionTableViewController.m; sourceTree = "<group>"; };
+		72A4BC2B1993314E00884AAC /* UZOpenInActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZOpenInActivity.h; sourceTree = "<group>"; };
+		72A4BC2C1993314E00884AAC /* UZOpenInActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZOpenInActivity.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +235,8 @@
 				72A4BC191992BD8B00884AAC /* UZUnzipOperation.m */,
 				72A4BC211992DD1800884AAC /* UZUnzipCoordinator.h */,
 				72A4BC221992DD1800884AAC /* UZUnzipCoordinator.m */,
+				72A4BC2B1993314E00884AAC /* UZOpenInActivity.h */,
+				72A4BC2C1993314E00884AAC /* UZOpenInActivity.m */,
 				7218C4AE19916F5E00D7C757 /* MainInterface.storyboard */,
 				7218C4CB1991F8B700D7C757 /* en.lproj */,
 				7218C4A919916F5E00D7C757 /* Supporting Files */,
@@ -451,6 +456,7 @@
 				72A4BC201992CA9F00884AAC /* UZNodeTableViewCell.m in Sources */,
 				7218C4CA1991F33100D7C757 /* UZPreviewViewController.m in Sources */,
 				7218C4C71991C99700D7C757 /* UZNode.m in Sources */,
+				72A4BC2D1993314E00884AAC /* UZOpenInActivity.m in Sources */,
 				72A4BC271993286E00884AAC /* UZExtensionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

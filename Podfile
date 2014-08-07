@@ -9,6 +9,6 @@ target "UnzipTests" do
 end
 
 target "UnzipAction" do
-pod "zipzap", "~> 7.0"
+	pod "zipzap", "~> 7.0"
 end
 

@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UZPreviewViewController">
             <connections>
+                <outlet property="containerView" destination="aNb-10-jUE" id="TsW-NO-DYQ"/>
                 <outlet property="progressLabel" destination="Axs-7g-IRh" id="g1d-bj-ih4"/>
                 <outlet property="progressView" destination="RQs-VR-bwq" id="d0N-3V-owl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -45,12 +46,36 @@
                         <constraint firstItem="RQs-VR-bwq" firstAttribute="top" secondItem="Axs-7g-IRh" secondAttribute="bottom" constant="8" id="yIH-V5-x3E"/>
                     </constraints>
                 </view>
+                <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNb-10-jUE">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gqP-iu-vEc">
+                    <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="ADf-C7-LE7"/>
+                    </constraints>
+                    <items>
+                        <barButtonItem systemItem="action" id="3T6-qE-WJc">
+                            <connections>
+                                <action selector="performAction:" destination="-1" id="CLh-Nw-Bc5"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="aNb-10-jUE" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2n7-fU-LbB"/>
                 <constraint firstAttribute="centerY" secondItem="h5v-uq-wKa" secondAttribute="centerY" id="9vs-JL-ezy"/>
+                <constraint firstItem="gqP-iu-vEc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EyH-Gx-eul"/>
+                <constraint firstAttribute="bottom" secondItem="gqP-iu-vEc" secondAttribute="bottom" id="HQ3-VS-Dja"/>
                 <constraint firstItem="h5v-uq-wKa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="He1-OZ-DDn"/>
+                <constraint firstItem="aNb-10-jUE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NM9-Ok-ckt"/>
+                <constraint firstItem="gqP-iu-vEc" firstAttribute="top" secondItem="aNb-10-jUE" secondAttribute="bottom" id="Qbt-i4-m8g"/>
                 <constraint firstAttribute="trailing" secondItem="h5v-uq-wKa" secondAttribute="trailing" id="nmr-ts-VC4"/>
+                <constraint firstAttribute="trailing" secondItem="gqP-iu-vEc" secondAttribute="trailing" id="nyj-H9-lfR"/>
+                <constraint firstAttribute="trailing" secondItem="aNb-10-jUE" secondAttribute="trailing" id="pfq-CZ-1Hc"/>
             </constraints>
             <point key="canvasLocation" x="323" y="345"/>
         </view>

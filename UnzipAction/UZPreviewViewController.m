@@ -9,6 +9,7 @@
 #import "UZPreviewViewController.h"
 #import "UZNode.h"
 #import "UZUnzipCoordinator.h"
+#import "UZOpenInActivity.h"
 
 #import <QuickLook/QuickLook.h>
 
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) UZPreviewItem *previewItem;
 @property (nonatomic, strong) QLPreviewController *previewController;
 
+@property (nonatomic, weak) IBOutlet UIView *containerView;
 @property (nonatomic, weak) IBOutlet UILabel *progressLabel;
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 @end
@@ -92,12 +94,23 @@
     [self.previewController reloadData];
 }
 
+#pragma mark - Actions
+
+- (IBAction)performAction:(id)sender
+{
+    if (self.previewItem == nil) return;
+    
+    UZOpenInActivity *openInActivity = [[UZOpenInActivity alloc] initWithBarButtonItem:sender];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.previewItem.fileURL] applicationActivities:@[openInActivity]];
+    [self presentViewController:activityViewController animated:YES completion:nil];
+}
+
 #pragma mark - Layout
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    _previewController.view.frame = self.view.bounds;
+    _previewController.view.frame = self.containerView.bounds;
 }
 
 #pragma mark - Accessors
@@ -112,7 +125,7 @@
         _previewController = previewController;
         
         [self addChildViewController:_previewController];
-        [self.view addSubview:_previewController.view];
+        [self.containerView addSubview:_previewController.view];
         [_previewController didMoveToParentViewController:self];
     }
 }
