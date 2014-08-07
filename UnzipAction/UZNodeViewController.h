@@ -6,15 +6,16 @@
 //  Copyright (c) 2014 Indragie Karunaratne. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "UZExtensionTableViewController.h"
 
 @class UZNode;
 @class UZUnzipCoordinator;
 
-@interface UZNodeViewController : UITableViewController
+@interface UZNodeViewController : UZExtensionTableViewController
 
 - (instancetype)initWithRootNode:(UZNode *)rootNode
-                unzipCoordinator:(UZUnzipCoordinator *)unzipCoordinator;
+                unzipCoordinator:(UZUnzipCoordinator *)unzipCoordinator
+                extensionContext:(NSExtensionContext *)extensionContext;
 
 @property (nonatomic, strong, readonly) UZNode *rootNode;
 @property (nonatomic, strong, readonly) UZUnzipCoordinator *unzipCoordinator;

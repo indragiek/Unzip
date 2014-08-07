@@ -45,22 +45,18 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
 
 - (instancetype)initWithRootNode:(UZNode *)rootNode
                 unzipCoordinator:(UZUnzipCoordinator *)unzipCoordinator
+                extensionContext:(NSExtensionContext *)extensionContext
 {
-    if ((self = [self init])) {
+    if ((self = [self initWithStyle:UITableViewStylePlain extensionContext:extensionContext])) {
         self.rootNode = rootNode;
         self.unzipCoordinator = unzipCoordinator;
     }
     return self;
 }
 
-- (instancetype)init
+- (instancetype)initWithStyle:(UITableViewStyle)style extensionContext:(NSExtensionContext *)extensionContext
 {
-    return [self initWithStyle:UITableViewStylePlain];
-}
-
-- (instancetype)initWithStyle:(UITableViewStyle)style
-{
-    if ((self = [super initWithStyle:style])) {
+    if ((self = [super initWithStyle:style extensionContext:extensionContext])) {
         [self commonInit_UZNodeViewController];
     }
     return self;
@@ -156,17 +152,17 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
     
     UZNode *node = [self nodeAtIndexPath:indexPath];
     if (node.directory) {
-        UZNodeViewController *viewController = [[self.class alloc] initWithRootNode:node unzipCoordinator:self.unzipCoordinator];
+        UZNodeViewController *viewController = [[self.class alloc] initWithRootNode:node unzipCoordinator:self.unzipCoordinator extensionContext:self.uz_extensionContext];
         [self.navigationController pushViewController:viewController animated:YES];
     } else if (node.encrypted) {
         [self presentPasswordAlertForNode:node completionHandler:^(NSString *password) {
             if (password != nil) {
-                UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:node password:password unzipCoordinator:self.unzipCoordinator];
+                UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:node password:password unzipCoordinator:self.unzipCoordinator extensionContext:self.uz_extensionContext];
                 [self.navigationController pushViewController:viewController animated:YES];
             }
         }];
     } else {
-        UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:node password:nil unzipCoordinator:self.unzipCoordinator];
+        UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:node password:nil unzipCoordinator:self.unzipCoordinator extensionContext:self.uz_extensionContext];
         [self.navigationController pushViewController:viewController animated:YES];
     }
 }

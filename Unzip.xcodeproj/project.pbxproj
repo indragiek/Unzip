@@ -25,6 +25,8 @@
 		72A4BC1A1992BD8B00884AAC /* UZUnzipOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC191992BD8B00884AAC /* UZUnzipOperation.m */; };
 		72A4BC201992CA9F00884AAC /* UZNodeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC1F1992CA9F00884AAC /* UZNodeTableViewCell.m */; };
 		72A4BC231992DD1800884AAC /* UZUnzipCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC221992DD1800884AAC /* UZUnzipCoordinator.m */; };
+		72A4BC271993286E00884AAC /* UZExtensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC261993286E00884AAC /* UZExtensionViewController.m */; };
+		72A4BC2A1993290D00884AAC /* UZExtensionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC291993290D00884AAC /* UZExtensionTableViewController.m */; };
 		91B01368CAFB453181A38E86 /* libPods-UnzipAction.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B27AF6F9FDC447882016106 /* libPods-UnzipAction.a */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +105,10 @@
 		72A4BC211992DD1800884AAC /* UZUnzipCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZUnzipCoordinator.h; sourceTree = "<group>"; };
 		72A4BC221992DD1800884AAC /* UZUnzipCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZUnzipCoordinator.m; sourceTree = "<group>"; };
 		72A4BC2419931B2700884AAC /* UZNodeViewControllerSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZNodeViewControllerSubclass.h; sourceTree = "<group>"; };
+		72A4BC251993286E00884AAC /* UZExtensionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZExtensionViewController.h; sourceTree = "<group>"; };
+		72A4BC261993286E00884AAC /* UZExtensionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZExtensionViewController.m; sourceTree = "<group>"; };
+		72A4BC281993290D00884AAC /* UZExtensionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZExtensionTableViewController.h; sourceTree = "<group>"; };
+		72A4BC291993290D00884AAC /* UZExtensionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZExtensionTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +216,10 @@
 				7218C4C61991C99700D7C757 /* UZNode.m */,
 				7218C4B91991748400D7C757 /* UZArchiveViewController.h */,
 				7218C4BA1991748400D7C757 /* UZArchiveViewController.m */,
+				72A4BC251993286E00884AAC /* UZExtensionViewController.h */,
+				72A4BC261993286E00884AAC /* UZExtensionViewController.m */,
+				72A4BC281993290D00884AAC /* UZExtensionTableViewController.h */,
+				72A4BC291993290D00884AAC /* UZExtensionTableViewController.m */,
 				7218C4C219917A5500D7C757 /* UZNodeViewController.h */,
 				7218C4C319917A5500D7C757 /* UZNodeViewController.m */,
 				72A4BC2419931B2700884AAC /* UZNodeViewControllerSubclass.h */,
@@ -436,10 +446,12 @@
 				7218C4C419917A5500D7C757 /* UZNodeViewController.m in Sources */,
 				72A4BC1A1992BD8B00884AAC /* UZUnzipOperation.m in Sources */,
 				7218C4C1199176B400D7C757 /* UIAlertController+UZError.m in Sources */,
+				72A4BC2A1993290D00884AAC /* UZExtensionTableViewController.m in Sources */,
 				7218C4BB1991748400D7C757 /* UZArchiveViewController.m in Sources */,
 				72A4BC201992CA9F00884AAC /* UZNodeTableViewCell.m in Sources */,
 				7218C4CA1991F33100D7C757 /* UZPreviewViewController.m in Sources */,
 				7218C4C71991C99700D7C757 /* UZNode.m in Sources */,
+				72A4BC271993286E00884AAC /* UZExtensionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

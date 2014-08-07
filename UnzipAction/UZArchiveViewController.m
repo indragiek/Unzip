@@ -36,27 +36,6 @@ static void GetZipURLInItems(NSArray *inputItems, void (^completionHandler)(NSUR
 
 @implementation UZArchiveViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        [self commonInit_UZArchiveViewController];
-    }
-    return self;
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    if ((self = [super initWithCoder:aDecoder])) {
-        [self commonInit_UZArchiveViewController];
-    }
-    return self;
-}
-
-- (void)commonInit_UZArchiveViewController
-{
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
-}
-
 #pragma mark - View Controller Lifecycle
 
 - (void)viewDidLoad
@@ -70,11 +49,6 @@ static void GetZipURLInItems(NSArray *inputItems, void (^completionHandler)(NSUR
             [self presentViewController:alert animated:YES completion:nil];
         }
     });
-}
-
-- (IBAction)done
-{
-    [self.extensionContext completeRequestReturningItems:self.extensionContext.inputItems completionHandler:nil];
 }
 
 #pragma mark - Accessors

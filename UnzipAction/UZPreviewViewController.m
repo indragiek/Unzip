@@ -53,8 +53,9 @@
 - (instancetype)initWithNode:(UZNode *)node
                     password:(NSString *)password
             unzipCoordinator:(UZUnzipCoordinator *)unzipCoordinator
+            extensionContext:(NSExtensionContext *)extensionContext
 {
-    if ((self = [super initWithNibName:nil bundle:nil])) {
+    if ((self = [super initWithExtensionContext:extensionContext])) {
         _node = node;
         _password = [password copy];
         _unzipCoordinator = unzipCoordinator;
