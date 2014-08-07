@@ -16,6 +16,7 @@
 @interface UZNodeViewController ()
 @property (nonatomic, strong) NSArray *sections;
 @property (nonatomic, strong, readonly) UILocalizedIndexedCollation *collation;
+@property (nonatomic, strong, readonly) NSByteCountFormatter *byteCountFormatter;
 @end
 
 static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *collation)
@@ -50,6 +51,7 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
     if ((self = [self initWithStyle:UITableViewStylePlain extensionContext:extensionContext])) {
         self.rootNode = rootNode;
         self.unzipCoordinator = unzipCoordinator;
+        _byteCountFormatter = [[NSByteCountFormatter alloc] init];
     }
     return self;
 }
@@ -138,7 +140,7 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
     
     cell.textLabel.text = node.fileName;
     if (!node.directory) {
-        cell.detailTextLabel.text = [NSByteCountFormatter stringFromByteCount:node.uncompressedSize countStyle:NSByteCountFormatterCountStyleFile];
+        cell.detailTextLabel.text = [self.byteCountFormatter stringFromByteCount:node.uncompressedSize];
     }
     
     return cell;
