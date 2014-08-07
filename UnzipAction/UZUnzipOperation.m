@@ -9,6 +9,10 @@
 #import "UZUnzipOperation.h"
 #import "UZNode.h"
 
+NSString * const UZUnzipOperationErrorDomain = @"UZUnzipOperationErrorDomain";
+const NSInteger UZUnzipOperationErrorCodeFailedToOpen = 1;
+const NSInteger UZUnzipOperationErrorCodeFailedToWrite = 2;
+
 @interface UZUnzipOperation ()
 @property (nonatomic, strong, readonly) UZNode *node;
 @property (nonatomic, copy, readwrite) NSString *password;
@@ -45,7 +49,7 @@
 
 - (void)main
 {
-    if (self.error) return;
+    if (self.error != nil) return;
     
     @autoreleasepool {
         NSURL *subdirectoryURL = [self.temporaryDirectoryURL URLByAppendingPathComponent:[[NSUUID UUID] UUIDString] isDirectory:YES];
@@ -58,14 +62,9 @@
             return;
         }
         
-        if (![fm createFileAtPath:fileURL.path contents:[NSData data] attributes:nil]) {
-            self.error = error;
-            return;
-        }
-        
-        NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingToURL:fileURL error:&error];
-        if (fileHandle == nil) {
-            self.error = error;
+        FILE *fd = fopen(fileURL.path.UTF8String, "w");
+        if (fd == NULL) {
+            self.error = [NSError errorWithDomain:UZUnzipOperationErrorDomain code:UZUnzipOperationErrorCodeFailedToOpen userInfo:nil];
             return;
         }
         
@@ -80,24 +79,30 @@
             NSInteger bytesRead = [self.stream read:bytes maxLength:remainingBytes];
 
             if (bytesRead > 0) {
-                [fileHandle writeData:[NSData dataWithBytesNoCopy:bytes length:bytesRead]];
-                totalBytesRead += bytesRead;
-                
-                if (self.progressHandler != nil) {
-                    self.progressHandler((float)totalBytesRead / totalSize);
+                if (fwrite(bytes, sizeof(uint8_t), bytesRead, fd) == bytesRead) {
+                    totalBytesRead += bytesRead;
+                    
+                    if (self.progressHandler != nil) {
+                        self.progressHandler((float)totalBytesRead / totalSize);
+                    }
+                } else {
+                    self.error = [NSError errorWithDomain:UZUnzipOperationErrorDomain code:UZUnzipOperationErrorCodeFailedToWrite userInfo:nil];
+                    break;
                 }
             } else {
+                self.error = self.stream.streamError;
                 break;
             }
         }
         
-        NSError *streamError = self.stream.streamError;
-        if (streamError != nil) {
-            self.error = streamError;
-        } else {
+        if (self.error == nil) {
             self.fileURL = fileURL;
+        } else {
+            [fm removeItemAtURL:fileURL error:nil];
         }
+        
         [self.stream close];
+        fclose(fd);
     }
 }
 

@@ -10,6 +10,11 @@
 
 @class UZNode;
 
+extern NSString * const UZUnzipOperationErrorDomain;
+
+extern const NSInteger UZUnzipOperationErrorCodeFailedToOpen;
+extern const NSInteger UZUnzipOperationErrorCodeFailedToWrite;
+
 @interface UZUnzipOperation : NSOperation
 
 @property (nonatomic, strong, readonly) NSError *error;
