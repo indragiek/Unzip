@@ -139,10 +139,13 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
     UZNode *node = [self nodeAtIndexPath:indexPath];
     
     cell.textLabel.text = node.fileName;
-    if (!node.directory) {
+    if (node.directory) {
+        cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    } else {
+        cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
         cell.detailTextLabel.text = [self.byteCountFormatter stringFromByteCount:node.uncompressedSize];
     }
-    
+
     return cell;
 }
 
