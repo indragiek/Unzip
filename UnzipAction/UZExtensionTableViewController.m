@@ -30,7 +30,9 @@
 
 - (void)commonInit_UZExtensionViewController
 {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
+    if (self.uz_extensionContext != nil) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
+    }
 }
 
 - (NSExtensionContext *)uz_extensionContext
