@@ -8,6 +8,7 @@
 
 #import "UZUnzipOperation.h"
 #import "UZNode.h"
+#import <libextobjc/EXTScope.h>
 
 NSString * const UZUnzipOperationErrorDomain = @"UZUnzipOperationErrorDomain";
 const NSInteger UZUnzipOperationErrorCodeFailedToOpen = 1;
@@ -62,19 +63,30 @@ const NSInteger UZUnzipOperationErrorCodeFailedToWrite = 2;
         }
         
         FILE *fd = fopen(fileURL.path.UTF8String, "w");
+        @onExit {
+            fclose(fd);
+        };
+        
         if (fd == NULL) {
             self.error = [NSError errorWithDomain:UZUnzipOperationErrorDomain code:UZUnzipOperationErrorCodeFailedToOpen userInfo:nil];
             return;
         }
         
         [self.stream open];
+        @onExit {
+            [self.stream close];
+        };
         
         NSUInteger totalBytesRead = 0;
         const NSUInteger totalSize = self.node.uncompressedSize;
         
         while (totalBytesRead < totalSize && !self.cancelled) {
             const NSUInteger remainingBytes = totalSize - totalBytesRead;
-            uint8_t bytes[remainingBytes];
+            uint8_t *bytes = malloc(sizeof(uint8_t) * remainingBytes);
+            @onExit {
+                free(bytes);
+            };
+            
             NSInteger bytesRead = [self.stream read:bytes maxLength:remainingBytes];
 
             if (bytesRead > 0) {
@@ -99,9 +111,6 @@ const NSInteger UZUnzipOperationErrorCodeFailedToWrite = 2;
         } else {
             [fm removeItemAtURL:fileURL error:nil];
         }
-        
-        [self.stream close];
-        fclose(fd);
     }
 }
 
