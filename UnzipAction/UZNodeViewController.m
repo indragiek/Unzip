@@ -101,12 +101,19 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+    backgroundView.backgroundColor = UIColor.whiteColor;
+    self.tableView.backgroundView = backgroundView;
+    
     if (!self.isSearchResultsController) {
-        CGRect searchBarFrame = self.searchController.searchBar.frame;
-        searchBarFrame.size.height = kSearchBarHeight;
-        self.searchController.searchBar.frame = searchBarFrame;
+        UISearchBar *searchBar = self.searchController.searchBar;
+        searchBar.searchBarStyle = UISearchBarStyleMinimal;
         
-        self.tableView.tableHeaderView = self.searchController.searchBar;
+        CGRect searchBarFrame = searchBar.frame;
+        searchBarFrame.size.height = kSearchBarHeight;
+        searchBar.frame = searchBarFrame;
+        
+        self.tableView.tableHeaderView = searchBar;
     }
 }
 
