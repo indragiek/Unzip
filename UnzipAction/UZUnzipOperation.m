@@ -14,7 +14,6 @@ const NSInteger UZUnzipOperationErrorCodeFailedToOpen = 1;
 const NSInteger UZUnzipOperationErrorCodeFailedToWrite = 2;
 
 @interface UZUnzipOperation ()
-@property (nonatomic, strong, readonly) UZNode *node;
 @property (nonatomic, copy, readwrite) NSString *password;
 @property (nonatomic, strong, readonly) NSInputStream *stream;
 @property (nonatomic, strong, readonly) NSURL *temporaryDirectoryURL;
@@ -73,7 +72,7 @@ const NSInteger UZUnzipOperationErrorCodeFailedToWrite = 2;
         NSUInteger totalBytesRead = 0;
         const NSUInteger totalSize = self.node.uncompressedSize;
         
-        while (totalBytesRead < totalSize) {
+        while (totalBytesRead < totalSize && !self.cancelled) {
             const NSUInteger remainingBytes = totalSize - totalBytesRead;
             uint8_t bytes[remainingBytes];
             NSInteger bytesRead = [self.stream read:bytes maxLength:remainingBytes];
@@ -95,7 +94,7 @@ const NSInteger UZUnzipOperationErrorCodeFailedToWrite = 2;
             }
         }
         
-        if (self.error == nil) {
+        if (self.error == nil && !self.cancelled) {
             self.fileURL = fileURL;
         } else {
             [fm removeItemAtURL:fileURL error:nil];

@@ -11,10 +11,18 @@
 @class ZZArchive;
 @class UZNode;
 
+@interface UZUnzipOperationToken : NSObject
+@end
+
 @interface UZUnzipCoordinator : NSObject
 
 - (instancetype)initWithArchive:(ZZArchive *)archive;
 
-- (void)unzipNode:(UZNode *)node password:(NSString *)password progressHandler:(void (^)(float progress))progressHandler completionHandler:(void (^)(NSURL *fileURL, NSError *error))completionHandler;
+- (UZUnzipOperationToken *)unzipNode:(UZNode *)node
+                            password:(NSString *)password
+                     progressHandler:(void (^)(float progress))progressHandler
+                   completionHandler:(void (^)(NSURL *fileURL, NSError *error))completionHandler;
+
+- (void)cancelUnzipOperationWithToken:(UZUnzipOperationToken *)token;
 
 @end

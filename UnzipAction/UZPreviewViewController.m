@@ -20,7 +20,8 @@
 @interface UZPreviewViewController () <QLPreviewControllerDataSource>
 @property (nonatomic, copy, readonly) NSString *password;
 @property (nonatomic, strong, readonly) UZNode *node;
-@property (nonatomic, strong, readwrite) UZUnzipCoordinator *unzipCoordinator;
+@property (nonatomic, strong, readonly) UZUnzipCoordinator *unzipCoordinator;
+@property (nonatomic, strong) UZUnzipOperationToken *unzipToken;
 @property (nonatomic, strong) UZPreviewItem *previewItem;
 @property (nonatomic, strong) QLPreviewController *previewController;
 
@@ -71,7 +72,12 @@
 {
     [super viewDidLoad];
     self.progressLabel.text = self.node.fileName;
-    [self.unzipCoordinator unzipNode:self.node password:self.password progressHandler:^(float progress) {
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.unzipToken = [self.unzipCoordinator unzipNode:self.node password:self.password progressHandler:^(float progress) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.progressView.progress = progress;
         });
@@ -84,6 +90,13 @@
             }
         });
     }];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.unzipCoordinator cancelUnzipOperationWithToken:self.unzipToken];
+    self.unzipToken = nil;
 }
 
 - (void)showQuickLookPreviewWithURL:(NSURL *)fileURL

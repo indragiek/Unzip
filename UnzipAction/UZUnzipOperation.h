@@ -17,6 +17,7 @@ extern const NSInteger UZUnzipOperationErrorCodeFailedToWrite;
 
 @interface UZUnzipOperation : NSOperation
 
+@property (nonatomic, strong, readonly) UZNode *node;
 @property (nonatomic, strong, readonly) NSError *error;
 @property (nonatomic, strong, readonly) NSURL *fileURL;
 @property (nonatomic, copy) void (^progressHandler)(float progress);
