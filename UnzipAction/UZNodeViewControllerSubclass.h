@@ -12,6 +12,12 @@
 @interface UZNodeViewController ()
 @property (nonatomic, strong, readwrite) UZNode *rootNode;
 @property (nonatomic, strong, readwrite) UZUnzipCoordinator *unzipCoordinator;
+@property (nonatomic, strong) NSString *searchQuery;
+
+- (instancetype)initWithRootNode:(UZNode *)rootNode
+                unzipCoordinator:(UZUnzipCoordinator *)unzipCoordinator
+                extensionContext:(NSExtensionContext *)extensionContext
+       isSearchResultsController:(BOOL)isSearchResultsController;
 @end
 
 #endif

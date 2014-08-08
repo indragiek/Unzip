@@ -13,10 +13,14 @@
 #import "UZNode.h"
 #import "UZUnzipCoordinator.h"
 
-@interface UZNodeViewController ()
+const CGFloat kSearchBarHeight = 44.0;
+
+@interface UZNodeViewController () <UISearchResultsUpdating>
 @property (nonatomic, strong) NSArray *sections;
 @property (nonatomic, strong, readonly) UILocalizedIndexedCollation *collation;
 @property (nonatomic, strong, readonly) NSByteCountFormatter *byteCountFormatter;
+@property (nonatomic, strong, readonly) UISearchController *searchController;
+@property (nonatomic, assign, readonly) BOOL isSearchResultsController;
 @end
 
 static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *collation)
@@ -48,25 +52,27 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
                 unzipCoordinator:(UZUnzipCoordinator *)unzipCoordinator
                 extensionContext:(NSExtensionContext *)extensionContext
 {
-    if ((self = [self initWithStyle:UITableViewStylePlain extensionContext:extensionContext])) {
+    return [self initWithRootNode:rootNode unzipCoordinator:unzipCoordinator extensionContext:extensionContext isSearchResultsController:NO];
+}
+
+- (instancetype)initWithRootNode:(UZNode *)rootNode
+                unzipCoordinator:(UZUnzipCoordinator *)unzipCoordinator
+                extensionContext:(NSExtensionContext *)extensionContext
+       isSearchResultsController:(BOOL)isSearchResultsController
+{
+    if ((self = [self initWithStyle:UITableViewStylePlain extensionContext:extensionContext isSearchResultsController:isSearchResultsController])) {
         self.rootNode = rootNode;
         self.unzipCoordinator = unzipCoordinator;
-        _byteCountFormatter = [[NSByteCountFormatter alloc] init];
     }
     return self;
 }
 
-- (instancetype)initWithStyle:(UITableViewStyle)style extensionContext:(NSExtensionContext *)extensionContext
+- (instancetype)initWithStyle:(UITableViewStyle)style
+             extensionContext:(NSExtensionContext *)extensionContext
+    isSearchResultsController:(BOOL)isSearchResultsController
 {
     if ((self = [super initWithStyle:style extensionContext:extensionContext])) {
-        [self commonInit_UZNodeViewController];
-    }
-    return self;
-}
-
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+        _isSearchResultsController = isSearchResultsController;
         [self commonInit_UZNodeViewController];
     }
     return self;
@@ -83,6 +89,33 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
 - (void)commonInit_UZNodeViewController
 {
     _collation = UILocalizedIndexedCollation.currentCollation;
+    _byteCountFormatter = [[NSByteCountFormatter alloc] init];
+    
+    if (!self.isSearchResultsController) {
+        UZNodeViewController *searchResultsController = [[UZNodeViewController alloc] initWithRootNode:self.rootNode unzipCoordinator:self.unzipCoordinator extensionContext:nil isSearchResultsController:YES];
+        _searchController = [[UISearchController alloc] initWithSearchResultsController:searchResultsController];
+        _searchController.searchResultsUpdater = searchResultsController;
+    }
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    if (!self.isSearchResultsController) {
+        CGRect searchBarFrame = self.searchController.searchBar.frame;
+        searchBarFrame.size.height = kSearchBarHeight;
+        self.searchController.searchBar.frame = searchBarFrame;
+        
+        self.tableView.tableHeaderView = self.searchController.searchBar;
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (!self.isSearchResultsController) {
+        self.tableView.contentOffset = (CGPoint){ .y = kSearchBarHeight };
+    }
 }
 
 #pragma mark - Accessors
@@ -170,6 +203,13 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
         UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:node password:nil unzipCoordinator:self.unzipCoordinator extensionContext:self.uz_extensionContext];
         [self.navigationController pushViewController:viewController animated:YES];
     }
+}
+
+#pragma mark - UISearchResultsUpdating
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    
 }
 
 #pragma mark - Private
