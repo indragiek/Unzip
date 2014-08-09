@@ -77,6 +77,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if (self.previewController != nil) return;
+    
     self.unzipToken = [self.unzipCoordinator unzipNode:self.node password:self.password progressHandler:^(float progress) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.progressView.progress = progress;
