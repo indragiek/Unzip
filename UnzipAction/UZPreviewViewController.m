@@ -130,6 +130,8 @@
         _previewController = previewController;
         
         UIView *previewView = _previewController.view;
+        previewView.translatesAutoresizingMaskIntoConstraints = NO;
+        
         [self addChildViewController:_previewController];
         
         [self.containerView addSubview:previewView];

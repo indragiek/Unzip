@@ -22,6 +22,7 @@
 		7218C4CA1991F33100D7C757 /* UZPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7218C4C91991F33100D7C757 /* UZPreviewViewController.m */; };
 		7218C4CE1991F8B700D7C757 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7218C4CC1991F8B700D7C757 /* Localizable.strings */; };
 		7218C4DB1991FC3800D7C757 /* UZPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7218C4DA1991FC3800D7C757 /* UZPreviewViewController.xib */; };
+		721AE34F1995B34300246FDF /* UZPreviewPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 721AE34E1995B34300246FDF /* UZPreviewPageViewController.m */; };
 		72A4BC1A1992BD8B00884AAC /* UZUnzipOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC191992BD8B00884AAC /* UZUnzipOperation.m */; };
 		72A4BC201992CA9F00884AAC /* UZNodeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC1F1992CA9F00884AAC /* UZNodeTableViewCell.m */; };
 		72A4BC231992DD1800884AAC /* UZUnzipCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC221992DD1800884AAC /* UZUnzipCoordinator.m */; };
@@ -99,6 +100,8 @@
 		7218C4C91991F33100D7C757 /* UZPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZPreviewViewController.m; sourceTree = "<group>"; };
 		7218C4CD1991F8B700D7C757 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		7218C4DA1991FC3800D7C757 /* UZPreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UZPreviewViewController.xib; sourceTree = "<group>"; };
+		721AE34D1995B34300246FDF /* UZPreviewPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZPreviewPageViewController.h; sourceTree = "<group>"; };
+		721AE34E1995B34300246FDF /* UZPreviewPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZPreviewPageViewController.m; sourceTree = "<group>"; };
 		72A4BC181992BD8B00884AAC /* UZUnzipOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZUnzipOperation.h; sourceTree = "<group>"; };
 		72A4BC191992BD8B00884AAC /* UZUnzipOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZUnzipOperation.m; sourceTree = "<group>"; };
 		72A4BC1E1992CA9F00884AAC /* UZNodeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZNodeTableViewCell.h; sourceTree = "<group>"; };
@@ -231,6 +234,8 @@
 				7218C4C81991F33100D7C757 /* UZPreviewViewController.h */,
 				7218C4C91991F33100D7C757 /* UZPreviewViewController.m */,
 				7218C4DA1991FC3800D7C757 /* UZPreviewViewController.xib */,
+				721AE34D1995B34300246FDF /* UZPreviewPageViewController.h */,
+				721AE34E1995B34300246FDF /* UZPreviewPageViewController.m */,
 				72A4BC181992BD8B00884AAC /* UZUnzipOperation.h */,
 				72A4BC191992BD8B00884AAC /* UZUnzipOperation.m */,
 				72A4BC211992DD1800884AAC /* UZUnzipCoordinator.h */,
@@ -448,6 +453,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72A4BC231992DD1800884AAC /* UZUnzipCoordinator.m in Sources */,
+				721AE34F1995B34300246FDF /* UZPreviewPageViewController.m in Sources */,
 				7218C4C419917A5500D7C757 /* UZNodeViewController.m in Sources */,
 				72A4BC1A1992BD8B00884AAC /* UZUnzipOperation.m in Sources */,
 				7218C4C1199176B400D7C757 /* UIAlertController+UZError.m in Sources */,
