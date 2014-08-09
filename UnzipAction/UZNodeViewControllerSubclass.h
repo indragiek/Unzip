@@ -17,7 +17,8 @@
 - (instancetype)initWithRootNode:(UZNode *)rootNode
                 unzipCoordinator:(UZUnzipCoordinator *)unzipCoordinator
                 extensionContext:(NSExtensionContext *)extensionContext
-       isSearchResultsController:(BOOL)isSearchResultsController;
+        parentNodeViewController:(UZNodeViewController *)parentNodeViewController;
+
 @end
 
 #endif

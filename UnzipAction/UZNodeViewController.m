@@ -20,8 +20,9 @@ const CGFloat kSearchBarHeight = 44.0;
 @property (nonatomic, strong, readonly) UILocalizedIndexedCollation *collation;
 @property (nonatomic, strong, readonly) NSByteCountFormatter *byteCountFormatter;
 
+@property (nonatomic, weak, readonly) UZNodeViewController *parentNodeViewController;
 @property (nonatomic, strong) UISearchController *searchController;
-@property (nonatomic, assign, readonly) BOOL isSearchResultsController;
+@property (nonatomic, assign, readonly, getter=isSearchResultsController) BOOL searchResultsController;
 @property (nonatomic, assign, readonly, getter=isSearching) BOOL searching;
 @property (nonatomic, strong) NSString *previousSearchQuery;
 @property (nonatomic, strong) NSArray *filteredResults;
@@ -69,27 +70,27 @@ static NSArray * FilteredChildren(NSArray *children, NSString *searchQuery)
                 unzipCoordinator:(UZUnzipCoordinator *)unzipCoordinator
                 extensionContext:(NSExtensionContext *)extensionContext
 {
-    return [self initWithRootNode:rootNode unzipCoordinator:unzipCoordinator extensionContext:extensionContext isSearchResultsController:NO];
+    return [self initWithRootNode:rootNode unzipCoordinator:unzipCoordinator extensionContext:extensionContext parentNodeViewController:nil];
 }
 
 - (instancetype)initWithRootNode:(UZNode *)rootNode
                 unzipCoordinator:(UZUnzipCoordinator *)unzipCoordinator
                 extensionContext:(NSExtensionContext *)extensionContext
-       isSearchResultsController:(BOOL)isSearchResultsController
+        parentNodeViewController:(UZNodeViewController *)parentNodeViewController
 {
-    if ((self = [self initWithStyle:UITableViewStylePlain extensionContext:extensionContext isSearchResultsController:isSearchResultsController])) {
-        self.rootNode = rootNode;
+    if ((self = [self initWithStyle:UITableViewStylePlain extensionContext:extensionContext parentNodeViewController:parentNodeViewController])) {
         self.unzipCoordinator = unzipCoordinator;
+        self.rootNode = rootNode;
     }
     return self;
 }
 
 - (instancetype)initWithStyle:(UITableViewStyle)style
              extensionContext:(NSExtensionContext *)extensionContext
-    isSearchResultsController:(BOOL)isSearchResultsController
+     parentNodeViewController:(UZNodeViewController *)parentNodeViewController
 {
     if ((self = [super initWithStyle:style extensionContext:extensionContext])) {
-        _isSearchResultsController = isSearchResultsController;
+        _parentNodeViewController = parentNodeViewController;
         [self commonInit_UZNodeViewController];
     }
     return self;
@@ -155,16 +156,6 @@ static NSArray * FilteredChildren(NSArray *children, NSString *searchQuery)
     }
 }
 
-- (BOOL)isSearching
-{
-    return (self.searchQuery.length != 0);
-}
-
-+ (NSSet *)keyPathsForValuesAffectingSearching
-{
-    return [NSSet setWithObject:@"searchQuery"];
-}
-
 - (void)setSearchQuery:(NSString *)searchQuery
 {
     if (_searchQuery != searchQuery) {
@@ -179,7 +170,52 @@ static NSArray * FilteredChildren(NSArray *children, NSString *searchQuery)
     }
 }
 
+- (BOOL)isSearching
+{
+    return (self.searchQuery.length != 0);
+}
+
++ (NSSet *)keyPathsForValuesAffectingSearching
+{
+    return [NSSet setWithObject:@"searchQuery"];
+}
+
+- (BOOL)isSearchResultsController
+{
+    return (self.parentNodeViewController != nil);
+}
+
++ (NSSet *)keyPathsForValuesAffectingSearchResultsController
+{
+    return [NSSet setWithObject:@"parentNodeViewController"];
+}
+
 #pragma mark - UITableViewDataSource
+
+- (UZNode *)nodeAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *children = self.sections[indexPath.section];
+    return children[indexPath.row];
+}
+
+- (void)rebuildSections
+{
+    NSArray *children = nil;
+    if (self.searching) {
+        if (self.previousSearchQuery != nil && [self.searchQuery hasPrefix:self.previousSearchQuery]) {
+            children = FilteredChildren(self.filteredResults, self.searchQuery);
+        } else {
+            children = FilteredChildren(self.rootNode.children, self.searchQuery);
+            self.filteredResults = children;
+        }
+    } else {
+        children = self.rootNode.children;
+        self.filteredResults = nil;
+    }
+    
+    self.sections = SectionsForNode(children, self.collation);
+    [self.tableView reloadData];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -239,18 +275,37 @@ static NSArray * FilteredChildren(NSArray *children, NSString *searchQuery)
     UZNode *node = [self nodeAtIndexPath:indexPath];
     if (node.directory) {
         UZNodeViewController *viewController = [[self.class alloc] initWithRootNode:node unzipCoordinator:self.unzipCoordinator extensionContext:self.uz_extensionContext];
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self pushViewController:viewController animated:YES];
     } else if (node.encrypted) {
         [self presentPasswordAlertForNode:node completionHandler:^(NSString *password) {
             if (password != nil) {
-                UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:node password:password unzipCoordinator:self.unzipCoordinator extensionContext:self.uz_extensionContext];
-                [self.navigationController pushViewController:viewController animated:YES];
+                [self pushPreviewControllerWithNode:node password:password];
             }
         }];
     } else {
-        UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:node password:nil unzipCoordinator:self.unzipCoordinator extensionContext:self.uz_extensionContext];
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self pushPreviewControllerWithNode:node password:nil];
     }
+}
+
+- (void)pushPreviewControllerWithNode:(UZNode *)node password:(NSString *)password
+{
+    UZPreviewViewController *viewController = [[UZPreviewViewController alloc] initWithNode:node password:password unzipCoordinator:self.unzipCoordinator extensionContext:self.uz_extensionContext];
+    [self pushViewController:viewController animated:YES];
+}
+
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    UINavigationController *navigationController = self.navigationController ?: self.parentNodeViewController.navigationController;
+    [navigationController pushViewController:viewController animated:animated];
+}
+
+#pragma mark - Search
+
+- (void)createSearchController
+{
+    UZNodeViewController *searchResultsController = [[UZNodeViewController alloc] initWithRootNode:_rootNode unzipCoordinator:self.unzipCoordinator extensionContext:nil parentNodeViewController:self];
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:searchResultsController];
+    self.searchController.searchResultsUpdater = searchResultsController;
 }
 
 #pragma mark - UISearchResultsUpdating
@@ -261,39 +316,7 @@ static NSArray * FilteredChildren(NSArray *children, NSString *searchQuery)
     viewController.searchQuery = searchController.searchBar.text;
 }
 
-#pragma mark - Private
-
-- (void)rebuildSections
-{
-    NSArray *children = nil;
-    if (self.searching) {
-        if (self.previousSearchQuery != nil && [self.searchQuery hasPrefix:self.previousSearchQuery]) {
-            children = FilteredChildren(self.filteredResults, self.searchQuery);
-        } else {
-            children = FilteredChildren(self.rootNode.children, self.searchQuery);
-            self.filteredResults = children;
-        }
-    } else {
-        children = self.rootNode.children;
-        self.filteredResults = nil;
-    }
-    
-    self.sections = SectionsForNode(children, self.collation);
-    [self.tableView reloadData];
-}
-
-- (void)createSearchController
-{
-    UZNodeViewController *searchResultsController = [[UZNodeViewController alloc] initWithRootNode:_rootNode unzipCoordinator:self.unzipCoordinator extensionContext:nil isSearchResultsController:YES];
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:searchResultsController];
-    self.searchController.searchResultsUpdater = searchResultsController;
-}
-
-- (UZNode *)nodeAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSArray *children = self.sections[indexPath.section];
-    return children[indexPath.row];
-}
+#pragma mark - Encryption
 
 - (void)presentPasswordAlertForNode:(UZNode *)node completionHandler:(void (^)(NSString *password))completionHandler
 {
