@@ -114,26 +114,19 @@ static NSArray * FilteredChildren(NSArray *children, NSString *searchQuery)
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
     backgroundView.backgroundColor = UIColor.whiteColor;
     self.tableView.backgroundView = backgroundView;
     
-    if (![self isSearchResultsController]) {
-        UISearchBar *searchBar = self.searchController.searchBar;
-        searchBar.searchBarStyle = UISearchBarStyleMinimal;
-        
-        CGRect searchBarFrame = searchBar.frame;
-        searchBarFrame.size.height = kSearchBarHeight;
-        searchBar.frame = searchBarFrame;
-        
-        self.tableView.tableHeaderView = searchBar;
-    }
+    [self configureAndDisplaySearchBar];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (![self isSearchResultsController]) {
+    
+    if (self.searchController != nil) {
         self.tableView.contentOffset = (CGPoint){ .y = kSearchBarHeight };
     }
 }
@@ -306,6 +299,21 @@ static NSArray * FilteredChildren(NSArray *children, NSString *searchQuery)
     UZNodeViewController *searchResultsController = [[UZNodeViewController alloc] initWithRootNode:_rootNode unzipCoordinator:self.unzipCoordinator extensionContext:nil parentNodeViewController:self];
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:searchResultsController];
     self.searchController.searchResultsUpdater = searchResultsController;
+    [self configureAndDisplaySearchBar];
+}
+
+- (void)configureAndDisplaySearchBar
+{
+    if (self.tableView.tableHeaderView != nil || self.searchController == nil) return;
+    
+    UISearchBar *searchBar = self.searchController.searchBar;
+    searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    
+    CGRect searchBarFrame = searchBar.frame;
+    searchBarFrame.size.height = kSearchBarHeight;
+    searchBar.frame = searchBarFrame;
+    
+    self.tableView.tableHeaderView = searchBar;
 }
 
 #pragma mark - UISearchResultsUpdating
