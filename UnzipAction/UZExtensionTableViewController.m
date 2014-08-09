@@ -11,25 +11,17 @@
 @implementation UZExtensionTableViewController
 @synthesize uz_extensionContext = _uz_extensionContext;
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    if ((self = [super initWithCoder:aDecoder])) {
-        [self commonInit_UZExtensionViewController];
-    }
-    return self;
-}
-
 - (instancetype)initWithStyle:(UITableViewStyle)style extensionContext:(NSExtensionContext *)extensionContext
 {
     if ((self = [super initWithStyle:style])) {
         _uz_extensionContext = extensionContext;
-        [self commonInit_UZExtensionViewController];
     }
     return self;
 }
 
-- (void)commonInit_UZExtensionViewController
+- (void)viewDidLoad
 {
+    [super viewDidLoad];
     if (self.uz_extensionContext != nil) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     }
