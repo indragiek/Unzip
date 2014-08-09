@@ -118,14 +118,6 @@
     [self presentViewController:activityViewController animated:YES completion:nil];
 }
 
-#pragma mark - Layout
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    _previewController.view.frame = self.containerView.bounds;
-}
-
 #pragma mark - Accessors
 
 - (void)setPreviewController:(QLPreviewController *)previewController
@@ -137,8 +129,14 @@
         
         _previewController = previewController;
         
+        UIView *previewView = _previewController.view;
         [self addChildViewController:_previewController];
-        [self.containerView addSubview:_previewController.view];
+        
+        [self.containerView addSubview:previewView];
+        NSDictionary *views = NSDictionaryOfVariableBindings(previewView);
+        [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[previewView]|" options:0 metrics:nil views:views]];
+        [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[previewView]|" options:0 metrics:nil views:views]];
+        
         [_previewController didMoveToParentViewController:self];
     }
 }
