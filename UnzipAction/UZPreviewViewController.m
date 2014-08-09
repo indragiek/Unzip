@@ -13,7 +13,7 @@
 
 #import <QuickLook/QuickLook.h>
 
-@interface UZPreviewItem : NSObject <QLPreviewItem>
+@interface UZQuickLookPreviewItem : NSObject <QLPreviewItem>
 @property (nonatomic, strong, readonly) NSURL *fileURL;
 @end
 
@@ -22,7 +22,7 @@
 @property (nonatomic, strong, readonly) UZNode *node;
 @property (nonatomic, strong, readonly) UZUnzipCoordinator *unzipCoordinator;
 @property (nonatomic, strong) UZUnzipOperationToken *unzipToken;
-@property (nonatomic, strong) UZPreviewItem *previewItem;
+@property (nonatomic, strong) UZQuickLookPreviewItem *previewItem;
 @property (nonatomic, strong) QLPreviewController *previewController;
 
 @property (nonatomic, weak) IBOutlet UIView *containerView;
@@ -30,7 +30,7 @@
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 @end
 
-@implementation UZPreviewItem
+@implementation UZQuickLookPreviewItem
 
 - (instancetype)initWithFileURL:(NSURL *)fileURL
 {
@@ -101,7 +101,7 @@
 
 - (void)showQuickLookPreviewWithURL:(NSURL *)fileURL
 {
-    self.previewItem = [[UZPreviewItem alloc] initWithFileURL:fileURL];
+    self.previewItem = [[UZQuickLookPreviewItem alloc] initWithFileURL:fileURL];
     self.previewController = [[QLPreviewController alloc] init];
     self.previewController.dataSource = self;
     [self.previewController reloadData];
