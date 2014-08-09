@@ -19,11 +19,15 @@ const CGFloat kSearchBarHeight = 44.0;
 @property (nonatomic, strong) NSArray *sections;
 @property (nonatomic, strong, readonly) UILocalizedIndexedCollation *collation;
 @property (nonatomic, strong, readonly) NSByteCountFormatter *byteCountFormatter;
-@property (nonatomic, strong, readonly) UISearchController *searchController;
+
+@property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, assign, readonly) BOOL isSearchResultsController;
+@property (nonatomic, assign, readonly, getter=isSearching) BOOL searching;
+@property (nonatomic, strong) NSString *previousSearchQuery;
+@property (nonatomic, strong) NSArray *filteredResults;
 @end
 
-static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *collation)
+static NSArray * SectionsForNode(NSArray *children, UILocalizedIndexedCollation *collation)
 {
     NSMutableArray *sections = [[NSMutableArray alloc] init];
     const SEL stringSelector = @selector(fileName);
@@ -33,7 +37,7 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
         [sections addObject:[[NSMutableArray alloc] init]];
     }
     
-    for (UZNode *child in node.children) {
+    for (UZNode *child in children) {
         NSInteger sectionIndex = [collation sectionForObject:child collationStringSelector:stringSelector];
         [sections[sectionIndex] addObject:child];
     }
@@ -44,6 +48,19 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
     }
     
     return sections;
+}
+
+static NSPredicate * FilterPredicate(NSString *searchQuery)
+{
+    return [NSPredicate predicateWithBlock:^BOOL(UZNode *node, NSDictionary *bindings) {
+        NSRange range = [node.fileName rangeOfString:searchQuery options:NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch];
+        return (range.location != NSNotFound);
+    }];
+}
+
+static NSArray * FilteredChildren(NSArray *children, NSString *searchQuery)
+{
+    return [children filteredArrayUsingPredicate:FilterPredicate(searchQuery)];
 }
 
 @implementation UZNodeViewController
@@ -90,12 +107,7 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
 {
     _collation = UILocalizedIndexedCollation.currentCollation;
     _byteCountFormatter = [[NSByteCountFormatter alloc] init];
-    
-    if (!self.isSearchResultsController) {
-        UZNodeViewController *searchResultsController = [[UZNodeViewController alloc] initWithRootNode:self.rootNode unzipCoordinator:self.unzipCoordinator extensionContext:nil isSearchResultsController:YES];
-        _searchController = [[UISearchController alloc] initWithSearchResultsController:searchResultsController];
-        _searchController.searchResultsUpdater = searchResultsController;
-    }
+    self.definesPresentationContext = YES;
 }
 
 - (void)viewDidLoad
@@ -105,7 +117,7 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
     backgroundView.backgroundColor = UIColor.whiteColor;
     self.tableView.backgroundView = backgroundView;
     
-    if (!self.isSearchResultsController) {
+    if (![self isSearchResultsController]) {
         UISearchBar *searchBar = self.searchController.searchBar;
         searchBar.searchBarStyle = UISearchBarStyleMinimal;
         
@@ -120,7 +132,7 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (!self.isSearchResultsController) {
+    if (![self isSearchResultsController]) {
         self.tableView.contentOffset = (CGPoint){ .y = kSearchBarHeight };
     }
 }
@@ -130,11 +142,40 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
 - (void)setRootNode:(UZNode *)rootNode
 {
     if (_rootNode != rootNode) {
+        self.searchController = nil;
+        
         _rootNode = rootNode;
         
+        if (![self isSearchResultsController]) {
+            [self createSearchController];
+        }
+        
         self.navigationItem.title = _rootNode.fileName;
-        self.sections = SectionsForNode(_rootNode, self.collation);
-        [self.tableView reloadData];
+        [self rebuildSections];
+    }
+}
+
+- (BOOL)isSearching
+{
+    return (self.searchQuery.length != 0);
+}
+
++ (NSSet *)keyPathsForValuesAffectingSearching
+{
+    return [NSSet setWithObject:@"searchQuery"];
+}
+
+- (void)setSearchQuery:(NSString *)searchQuery
+{
+    if (_searchQuery != searchQuery) {
+        if (searchQuery.length) {
+            self.previousSearchQuery = _searchQuery;
+        } else {
+            self.previousSearchQuery = nil;
+        }
+        
+        _searchQuery = searchQuery;
+        [self rebuildSections];
     }
 }
 
@@ -216,10 +257,37 @@ static NSArray * SectionsForNode(UZNode *node, UILocalizedIndexedCollation *coll
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-    
+    UZNodeViewController *viewController = (UZNodeViewController *)searchController.searchResultsController;
+    viewController.searchQuery = searchController.searchBar.text;
 }
 
 #pragma mark - Private
+
+- (void)rebuildSections
+{
+    NSArray *children = nil;
+    if (self.searching) {
+        if (self.previousSearchQuery != nil && [self.searchQuery hasPrefix:self.previousSearchQuery]) {
+            children = FilteredChildren(self.filteredResults, self.searchQuery);
+        } else {
+            children = FilteredChildren(self.rootNode.children, self.searchQuery);
+            self.filteredResults = children;
+        }
+    } else {
+        children = self.rootNode.children;
+        self.filteredResults = nil;
+    }
+    
+    self.sections = SectionsForNode(children, self.collation);
+    [self.tableView reloadData];
+}
+
+- (void)createSearchController
+{
+    UZNodeViewController *searchResultsController = [[UZNodeViewController alloc] initWithRootNode:_rootNode unzipCoordinator:self.unzipCoordinator extensionContext:nil isSearchResultsController:YES];
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:searchResultsController];
+    self.searchController.searchResultsUpdater = searchResultsController;
+}
 
 - (UZNode *)nodeAtIndexPath:(NSIndexPath *)indexPath
 {
