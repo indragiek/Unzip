@@ -29,6 +29,7 @@
 		72A4BC271993286E00884AAC /* UZExtensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC261993286E00884AAC /* UZExtensionViewController.m */; };
 		72A4BC2A1993290D00884AAC /* UZExtensionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC291993290D00884AAC /* UZExtensionTableViewController.m */; };
 		72A4BC2D1993314E00884AAC /* UZOpenInActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC2C1993314E00884AAC /* UZOpenInActivity.m */; };
+		72B3C10419A04B6900801EF9 /* UZGlyphFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B3C10319A04B6900801EF9 /* UZGlyphFactory.m */; };
 		91B01368CAFB453181A38E86 /* libPods-UnzipAction.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B27AF6F9FDC447882016106 /* libPods-UnzipAction.a */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +116,8 @@
 		72A4BC291993290D00884AAC /* UZExtensionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZExtensionTableViewController.m; sourceTree = "<group>"; };
 		72A4BC2B1993314E00884AAC /* UZOpenInActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZOpenInActivity.h; sourceTree = "<group>"; };
 		72A4BC2C1993314E00884AAC /* UZOpenInActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZOpenInActivity.m; sourceTree = "<group>"; };
+		72B3C10219A04B6900801EF9 /* UZGlyphFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZGlyphFactory.h; sourceTree = "<group>"; };
+		72B3C10319A04B6900801EF9 /* UZGlyphFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZGlyphFactory.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +245,8 @@
 				72A4BC221992DD1800884AAC /* UZUnzipCoordinator.m */,
 				72A4BC2B1993314E00884AAC /* UZOpenInActivity.h */,
 				72A4BC2C1993314E00884AAC /* UZOpenInActivity.m */,
+				72B3C10219A04B6900801EF9 /* UZGlyphFactory.h */,
+				72B3C10319A04B6900801EF9 /* UZGlyphFactory.m */,
 				7218C4AE19916F5E00D7C757 /* MainInterface.storyboard */,
 				7218C4CB1991F8B700D7C757 /* en.lproj */,
 				7218C4A919916F5E00D7C757 /* Supporting Files */,
@@ -464,6 +469,7 @@
 				7218C4C71991C99700D7C757 /* UZNode.m in Sources */,
 				72A4BC2D1993314E00884AAC /* UZOpenInActivity.m in Sources */,
 				72A4BC271993286E00884AAC /* UZExtensionViewController.m in Sources */,
+				72B3C10419A04B6900801EF9 /* UZGlyphFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

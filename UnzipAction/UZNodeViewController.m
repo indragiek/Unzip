@@ -12,6 +12,7 @@
 #import "UZPreviewViewController.h"
 #import "UZNode.h"
 #import "UZUnzipCoordinator.h"
+#import "UZGlyphFactory.h"
 
 const CGFloat kSearchBarHeight = 44.0;
 
@@ -251,9 +252,11 @@ static NSArray * FilteredChildren(NSArray *children, NSString *searchQuery)
     cell.textLabel.text = node.fileName;
     if (node.directory) {
         cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+        cell.imageView.image = UZDirectoryGlyphImage(nil);
     } else {
         cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
         cell.detailTextLabel.text = [self.byteCountFormatter stringFromByteCount:node.uncompressedSize];
+        cell.imageView.image = UZFileGlyphImage(node.fileName, nil);
     }
 
     return cell;
