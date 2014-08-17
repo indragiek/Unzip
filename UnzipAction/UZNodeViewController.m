@@ -256,7 +256,7 @@ static NSArray * FilteredChildren(NSArray *children, NSString *searchQuery)
     } else {
         cell.fileNameLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
         cell.fileSizeLabel.text = [self.byteCountFormatter stringFromByteCount:node.uncompressedSize];
-        cell.glyphImageView.image = UZFileGlyphImage(node.fileName, nil);
+        cell.glyphImageView.image = UZFileGlyphImage(node.fileName, UIColor.blueColor);
     }
 
     return cell;

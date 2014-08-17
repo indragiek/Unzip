@@ -9,7 +9,9 @@
 #import "UZGlyphFactory.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
-static UIImage * ImageForUTI(CFStringRef UTI)
+static NSMutableDictionary *_tintedImages = nil;
+
+static NSString * FileTypeForUTI(CFStringRef UTI)
 {
     NSString *fileType = nil;
     if (UTTypeConformsTo(UTI, kUTTypeArchive)) {
@@ -35,18 +37,67 @@ static UIImage * ImageForUTI(CFStringRef UTI)
     } else {
         fileType = @"Generic";
     }
-    return [UIImage imageNamed:[NSString stringWithFormat:@"FileType%@", fileType]];
+    return fileType;
+}
+
+static UIImage * MaskImageForUTI(CFStringRef UTI)
+{
+    return [UIImage imageNamed:[NSString stringWithFormat:@"FileType%@", FileTypeForUTI(UTI)]];
+}
+
+static UIImage * TintedImageFromMask(UIImage *mask, UIColor *tintColor)
+{
+    UIGraphicsBeginImageContextWithOptions(mask.size, NO, mask.scale);
+    
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    const CGRect bounds = (CGRect){ .size = mask.size };
+    
+    CGAffineTransform flipVertical = CGAffineTransformMake(1, 0, 0, -1, 0, CGRectGetHeight(bounds));
+    CGContextConcatCTM(ctx, flipVertical);
+    
+    CGContextClipToMask(ctx, bounds, mask.CGImage);
+    [tintColor set];
+    UIRectFill(bounds);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+static UIColor * SystemDefaultTintColor()
+{
+    static UIColor *tintColor = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        tintColor = [[[UIView alloc] initWithFrame:CGRectZero] tintColor];
+    });
+    return tintColor;
+}
+
+static UIImage * GlyphImageForUTI(CFStringRef UTI)
+{
+    NSCAssert([NSThread isMainThread], @"This function can only be called from the main thread.");
+    
+    UIImage *image = _tintedImages[(__bridge NSString *)UTI];
+    if (image == nil) {
+        image = TintedImageFromMask(MaskImageForUTI(UTI), SystemDefaultTintColor());
+        if (_tintedImages == nil) {
+            _tintedImages = [[NSMutableDictionary alloc] init];
+        }
+        _tintedImages[(__bridge NSString *)UTI] = image;
+    }
+    return image;
 }
 
 UIImage * UZDirectoryGlyphImage(UIColor *tintColor)
 {
-    return ImageForUTI(kUTTypeDirectory);
+    return GlyphImageForUTI(kUTTypeDirectory);
 }
 
 UIImage * UZFileGlyphImage(NSString *fileName, UIColor *tintColor)
 {
     CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)fileName.pathExtension, NULL);
-    UIImage *image = ImageForUTI(UTI);
+    UIImage *image = GlyphImageForUTI(UTI);
     CFRelease(UTI);
     return image;
 }
