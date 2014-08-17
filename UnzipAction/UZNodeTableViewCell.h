@@ -10,4 +10,11 @@
 
 @interface UZNodeTableViewCell : UITableViewCell
 
+@property (nonatomic, weak) IBOutlet UIImageView *glyphImageView;
+@property (nonatomic, weak) IBOutlet UILabel *fileNameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *fileSizeLabel;
+
++ (NSString *)reuseIdentifier;
++ (CGFloat)rowHeight;
+
 @end

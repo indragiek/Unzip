@@ -120,6 +120,10 @@ static NSArray * FilteredChildren(NSArray *children, NSString *searchQuery)
     backgroundView.backgroundColor = UIColor.whiteColor;
     self.tableView.backgroundView = backgroundView;
     
+    UINib *nib = [UINib nibWithNibName:NSStringFromClass(UZNodeTableViewCell.class) bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:UZNodeTableViewCell.reuseIdentifier];
+    self.tableView.rowHeight = UZNodeTableViewCell.rowHeight;
+    
     [self configureAndDisplaySearchBar];
 }
 
@@ -241,22 +245,18 @@ static NSArray * FilteredChildren(NSArray *children, NSString *searchQuery)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *reuseIdentifier = @"NodeCell";
-    UZNodeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell == nil) {
-        cell = [[UZNodeTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
-    }
-    
+    UZNodeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:UZNodeTableViewCell.reuseIdentifier];
     UZNode *node = [self nodeAtIndexPath:indexPath];
     
-    cell.textLabel.text = node.fileName;
+    cell.fileNameLabel.text = node.fileName;
     if (node.directory) {
-        cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-        cell.imageView.image = UZDirectoryGlyphImage(nil);
+        cell.fileNameLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+        cell.fileSizeLabel.text = nil;
+        cell.glyphImageView.image = UZDirectoryGlyphImage(nil);
     } else {
-        cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-        cell.detailTextLabel.text = [self.byteCountFormatter stringFromByteCount:node.uncompressedSize];
-        cell.imageView.image = UZFileGlyphImage(node.fileName, nil);
+        cell.fileNameLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        cell.fileSizeLabel.text = [self.byteCountFormatter stringFromByteCount:node.uncompressedSize];
+        cell.glyphImageView.image = UZFileGlyphImage(node.fileName, nil);
     }
 
     return cell;

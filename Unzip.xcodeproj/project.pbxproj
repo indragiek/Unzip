@@ -30,6 +30,7 @@
 		72A4BC2A1993290D00884AAC /* UZExtensionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC291993290D00884AAC /* UZExtensionTableViewController.m */; };
 		72A4BC2D1993314E00884AAC /* UZOpenInActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A4BC2C1993314E00884AAC /* UZOpenInActivity.m */; };
 		72B3C10419A04B6900801EF9 /* UZGlyphFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B3C10319A04B6900801EF9 /* UZGlyphFactory.m */; };
+		72B3C10819A050E500801EF9 /* UZNodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72B3C10719A050E500801EF9 /* UZNodeTableViewCell.xib */; };
 		91B01368CAFB453181A38E86 /* libPods-UnzipAction.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B27AF6F9FDC447882016106 /* libPods-UnzipAction.a */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +119,7 @@
 		72A4BC2C1993314E00884AAC /* UZOpenInActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZOpenInActivity.m; sourceTree = "<group>"; };
 		72B3C10219A04B6900801EF9 /* UZGlyphFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZGlyphFactory.h; sourceTree = "<group>"; };
 		72B3C10319A04B6900801EF9 /* UZGlyphFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZGlyphFactory.m; sourceTree = "<group>"; };
+		72B3C10719A050E500801EF9 /* UZNodeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UZNodeTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +236,7 @@
 				72A4BC2419931B2700884AAC /* UZNodeViewControllerSubclass.h */,
 				72A4BC1E1992CA9F00884AAC /* UZNodeTableViewCell.h */,
 				72A4BC1F1992CA9F00884AAC /* UZNodeTableViewCell.m */,
+				72B3C10719A050E500801EF9 /* UZNodeTableViewCell.xib */,
 				7218C4C81991F33100D7C757 /* UZPreviewViewController.h */,
 				7218C4C91991F33100D7C757 /* UZPreviewViewController.m */,
 				7218C4DA1991FC3800D7C757 /* UZPreviewViewController.xib */,
@@ -393,6 +396,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72B3C10819A050E500801EF9 /* UZNodeTableViewCell.xib in Resources */,
 				7218C4AF19916F5E00D7C757 /* MainInterface.storyboard in Resources */,
 				7218C4CE1991F8B700D7C757 /* Localizable.strings in Resources */,
 				7218C4DB1991FC3800D7C757 /* UZPreviewViewController.xib in Resources */,

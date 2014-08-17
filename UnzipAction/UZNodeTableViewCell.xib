@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6205" systemVersion="14A314h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="UZNodeTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uyp-IE-FR4">
+                    <rect key="frame" x="12" y="12" width="28" height="28"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="JUR-bQ-ZEP"/>
+                        <constraint firstAttribute="height" constant="28" id="Oh2-L8-lxo"/>
+                        <constraint firstAttribute="width" constant="28" id="chO-Aj-gNO"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="28" id="t6u-Br-tmT"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIw-Mb-95V">
+                    <rect key="frame" x="52" y="7" width="256" height="21.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                    <color key="textColor" red="0.10980392156862745" green="0.11764705882352941" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5u-6A-IPh">
+                    <rect key="frame" x="52" y="30" width="256" height="14.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                    <color key="textColor" red="0.40784313725490196" green="0.46274509803921571" blue="0.50588235294117645" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="f5u-6A-IPh" firstAttribute="top" secondItem="EIw-Mb-95V" secondAttribute="bottom" constant="1.5" id="3OH-rK-Pr1"/>
+                <constraint firstItem="uyp-IE-FR4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="4Zl-6m-uzQ"/>
+                <constraint firstItem="f5u-6A-IPh" firstAttribute="leading" secondItem="uyp-IE-FR4" secondAttribute="trailing" constant="12" id="8Ci-Ph-Lho"/>
+                <constraint firstAttribute="trailing" secondItem="EIw-Mb-95V" secondAttribute="trailing" constant="12" id="94Q-1w-sdr"/>
+                <constraint firstItem="uyp-IE-FR4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="HeP-hv-CI0"/>
+                <constraint firstAttribute="bottom" secondItem="uyp-IE-FR4" secondAttribute="bottom" constant="12" id="KSO-LD-dC6"/>
+                <constraint firstItem="EIw-Mb-95V" firstAttribute="leading" secondItem="uyp-IE-FR4" secondAttribute="trailing" constant="12" id="dhT-CI-trF"/>
+                <constraint firstAttribute="trailing" secondItem="f5u-6A-IPh" secondAttribute="trailing" constant="12" id="f71-Nk-kTA"/>
+                <constraint firstAttribute="bottom" secondItem="f5u-6A-IPh" secondAttribute="bottom" constant="7" id="mP2-VT-sE6"/>
+                <constraint firstItem="EIw-Mb-95V" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="7" id="y4C-8V-w7y"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="fileNameLabel" destination="EIw-Mb-95V" id="JFy-Bm-keE"/>
+                <outlet property="fileSizeLabel" destination="f5u-6A-IPh" id="Y0L-2K-n6m"/>
+                <outlet property="glyphImageView" destination="uyp-IE-FR4" id="aqk-3c-jny"/>
+            </connections>
+            <point key="canvasLocation" x="268" y="112"/>
+        </view>
+    </objects>
+</document>

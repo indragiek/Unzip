@@ -10,12 +10,24 @@
 
 @implementation UZNodeTableViewCell
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
++ (NSString *)reuseIdentifier
 {
-    if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
-        self.detailTextLabel.textColor = UIColor.grayColor;
-    }
-    return self;
+    return NSStringFromClass(self.class);
+}
+
++ (CGFloat)rowHeight
+{
+    return 52.0;
+}
+
+#pragma mark - UITableViewCell
+
+- (void)prepareForReuse
+{
+    self.fileNameLabel.text = nil;
+    self.fileSizeLabel.text = nil;
+    self.glyphImageView.image = nil;
+    [super prepareForReuse];
 }
 
 @end
