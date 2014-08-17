@@ -12,7 +12,6 @@
 		7218C48919916F4B00D7C757 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7218C48819916F4B00D7C757 /* ViewController.m */; };
 		7218C48C19916F4B00D7C757 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7218C48A19916F4B00D7C757 /* Main.storyboard */; };
 		7218C48E19916F4B00D7C757 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7218C48D19916F4B00D7C757 /* Images.xcassets */; };
-		7218C49A19916F4C00D7C757 /* UnzipTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7218C49919916F4C00D7C757 /* UnzipTests.m */; };
 		7218C4AF19916F5E00D7C757 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7218C4AE19916F5E00D7C757 /* MainInterface.storyboard */; };
 		7218C4B219916F5E00D7C757 /* UnzipAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7218C4A719916F5E00D7C757 /* UnzipAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7218C4BB1991748400D7C757 /* UZArchiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7218C4BA1991748400D7C757 /* UZArchiveViewController.m */; };
@@ -35,13 +34,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7218C49419916F4C00D7C757 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7218C47519916F4B00D7C757 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7218C47C19916F4B00D7C757;
-			remoteInfo = Unzip;
-		};
 		7218C4B019916F5E00D7C757 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7218C47519916F4B00D7C757 /* Project object */;
@@ -84,9 +76,6 @@
 		7218C48819916F4B00D7C757 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		7218C48B19916F4B00D7C757 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7218C48D19916F4B00D7C757 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		7218C49319916F4C00D7C757 /* UnzipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnzipTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7218C49819916F4C00D7C757 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7218C49919916F4C00D7C757 /* UnzipTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnzipTests.m; sourceTree = "<group>"; };
 		7218C4A719916F5E00D7C757 /* UnzipAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = UnzipAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7218C4AA19916F5E00D7C757 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7218C4AE19916F5E00D7C757 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
@@ -130,13 +119,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7218C49019916F4C00D7C757 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7218C4A419916F5E00D7C757 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -160,7 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				7218C47F19916F4B00D7C757 /* Unzip */,
-				7218C49619916F4C00D7C757 /* UnzipTests */,
 				7218C4A819916F5E00D7C757 /* UnzipAction */,
 				7218C47E19916F4B00D7C757 /* Products */,
 				637E3FFF75B74F979BBAAAC9 /* Pods-UnzipAction.xcconfig */,
@@ -172,7 +153,6 @@
 			isa = PBXGroup;
 			children = (
 				7218C47D19916F4B00D7C757 /* Unzip.app */,
-				7218C49319916F4C00D7C757 /* UnzipTests.xctest */,
 				7218C4A719916F5E00D7C757 /* UnzipAction.appex */,
 			);
 			name = Products;
@@ -197,23 +177,6 @@
 			children = (
 				7218C48119916F4B00D7C757 /* Info.plist */,
 				7218C48219916F4B00D7C757 /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		7218C49619916F4C00D7C757 /* UnzipTests */ = {
-			isa = PBXGroup;
-			children = (
-				7218C49919916F4C00D7C757 /* UnzipTests.m */,
-				7218C49719916F4C00D7C757 /* Supporting Files */,
-			);
-			path = UnzipTests;
-			sourceTree = "<group>";
-		};
-		7218C49719916F4C00D7C757 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				7218C49819916F4C00D7C757 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -296,24 +259,6 @@
 			productReference = 7218C47D19916F4B00D7C757 /* Unzip.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7218C49219916F4C00D7C757 /* UnzipTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7218C4A019916F4C00D7C757 /* Build configuration list for PBXNativeTarget "UnzipTests" */;
-			buildPhases = (
-				7218C48F19916F4C00D7C757 /* Sources */,
-				7218C49019916F4C00D7C757 /* Frameworks */,
-				7218C49119916F4C00D7C757 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7218C49519916F4C00D7C757 /* PBXTargetDependency */,
-			);
-			name = UnzipTests;
-			productName = UnzipTests;
-			productReference = 7218C49319916F4C00D7C757 /* UnzipTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		7218C4A619916F5E00D7C757 /* UnzipAction */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7218C4B519916F5E00D7C757 /* Build configuration list for PBXNativeTarget "UnzipAction" */;
@@ -345,10 +290,6 @@
 					7218C47C19916F4B00D7C757 = {
 						CreatedOnToolsVersion = 6.0;
 					};
-					7218C49219916F4C00D7C757 = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = 7218C47C19916F4B00D7C757;
-					};
 					7218C4A619916F5E00D7C757 = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = H73VKH7W9W;
@@ -369,7 +310,6 @@
 			projectRoot = "";
 			targets = (
 				7218C47C19916F4B00D7C757 /* Unzip */,
-				7218C49219916F4C00D7C757 /* UnzipTests */,
 				7218C4A619916F5E00D7C757 /* UnzipAction */,
 			);
 		};
@@ -382,13 +322,6 @@
 			files = (
 				7218C48C19916F4B00D7C757 /* Main.storyboard in Resources */,
 				7218C48E19916F4B00D7C757 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7218C49119916F4C00D7C757 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,14 +382,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7218C48F19916F4C00D7C757 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7218C49A19916F4C00D7C757 /* UnzipTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7218C4A319916F5E00D7C757 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -480,11 +405,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7218C49519916F4C00D7C757 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7218C47C19916F4B00D7C757 /* Unzip */;
-			targetProxy = 7218C49419916F4C00D7C757 /* PBXContainerItemProxy */;
-		};
 		7218C4B119916F5E00D7C757 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7218C4A619916F5E00D7C757 /* UnzipAction */;
@@ -615,40 +535,6 @@
 			};
 			name = Release;
 		};
-		7218C4A119916F4C00D7C757 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = UnzipTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Unzip.app/Unzip";
-			};
-			name = Debug;
-		};
-		7218C4A219916F4C00D7C757 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = UnzipTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Unzip.app/Unzip";
-			};
-			name = Release;
-		};
 		7218C4B619916F5E00D7C757 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 637E3FFF75B74F979BBAAAC9 /* Pods-UnzipAction.xcconfig */;
@@ -694,15 +580,6 @@
 			buildConfigurations = (
 				7218C49E19916F4C00D7C757 /* Debug */,
 				7218C49F19916F4C00D7C757 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7218C4A019916F4C00D7C757 /* Build configuration list for PBXNativeTarget "UnzipTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7218C4A119916F4C00D7C757 /* Debug */,
-				7218C4A219916F4C00D7C757 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
