@@ -23,7 +23,7 @@
 {
     [super viewDidLoad];
     if (self.uz_extensionContext != nil) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", nil) style:UIBarButtonItemStylePlain target:self action:@selector(close)];
     }
 }
 
@@ -37,7 +37,7 @@
     return [NSSet setWithObject:@"extensionContext"];
 }
 
-- (void)done
+- (void)close
 {
     [self.uz_extensionContext completeRequestReturningItems:self.uz_extensionContext.inputItems completionHandler:nil];
 }
