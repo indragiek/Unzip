@@ -16,6 +16,10 @@ $ pod install
 
 Open **Unzip.xcworkspace**. The **Unzip** app itself doesn't contain anything, everything is implemented in **UnzipAction**.
 
+### Icons
+
+The icons shown in the image above are from the [Glyphish 8](http://www.glyphish.com) icon set. They could not be included in this repository due to license incompatibility.
+
 ### Contact
 
 * Indragie Karunaratne
